@@ -4,23 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Article;
-
-class ArticleController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index() {
-        $articles = Article::orderBy('created_at', 'desc')->get();
-        return view('articles.overview', compact('articles'));
+    public function index()
+    {
+        //
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {
-        return view('articles.create');
+    public function create()
+    {
+        //
     }
 
     /**
@@ -28,12 +27,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $article = new Article();
-        $article->name = $request->input('name');
-        $article->entry = $request->input('entry');
-        $article->save();
-
-        return redirect()->route('articles.overview');
+        //
     }
 
     /**
@@ -41,8 +35,7 @@ class ArticleController extends Controller
      */
     public function show(string $id)
     {
-        // $article = Article::;
-        return view('articles.show', compact('article'));
+        //
     }
 
     /**
