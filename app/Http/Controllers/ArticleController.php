@@ -6,23 +6,21 @@ use Illuminate\Http\Request;
 
 use App\Models\Article;
 
-class OverviewController extends Controller
+class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index() {
-        
         $articles = Article::orderBy('created_at', 'desc')->get();
-        return view('overview', compact('articles'));
+        return view('articles.overview', compact('articles'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
+    public function create() {
+        return view('articles.create');
     }
 
     /**
@@ -30,7 +28,12 @@ class OverviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $article = new Article();
+        $article->name = $request->input('name');
+        $article->entry = $request->input('entry');
+        $article->save();
+
+        return redirect()->route('articles.overview');
     }
 
     /**

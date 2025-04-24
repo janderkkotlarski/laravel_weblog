@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>App Name - @yield('title')</title>
+		<title>Artikeloverzicht</title>
 	</head>
 	<body>
 		@include('partials.nav')
 		@yield('content')
 
-		<h1>Article Overview</h1>
+		<h1>Artikeloverzicht</h1>
 		<table>
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>Time</th>
+					<th>Naam</th>
+					<th>Aanmaaktijd</th>
 				</tr>
 			</thead>
 			<tbody>
