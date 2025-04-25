@@ -4,6 +4,8 @@
 	Artikeloverzicht
 @endsection
 
+
+
 @section('content')
 	<table>
 		<thead>
@@ -15,14 +17,14 @@
 		<tbody>
 			@foreach($articles as $article)
 				<tr>
-					<td>{{ $article->name }}</td>
+					<td>
+						
+						<a href="{{ route('articles.show', $article) }}" method="GET">{{ $article->id }}</a>						
 					<td>{{ $article->created_at }}</td>
 				</tr>
 			@endforeach
 		</tbody>
 	</table>
 @endsection
-
-
 		
 

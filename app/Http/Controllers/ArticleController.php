@@ -39,10 +39,13 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Article $article)
     {
-        // $article = Article::;
-        return view('articles.show', compact('article'));
+        var_dump($_GET);
+
+        $arr = $_GET;
+
+        return view('articles.show', compact('arr'));
     }
 
     /**

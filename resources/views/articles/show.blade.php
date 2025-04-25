@@ -5,6 +5,8 @@
 @endsection
 
 @section('content')
+	{{ var_dump($arr) }}
+
 	<table>
 		<thead>
 			<tr>
@@ -13,7 +15,7 @@
 		</thead>
 		<tbody>
 				<tr>
-					<td>{{ $article->name }}</td>					
+					<td></td>					
 				</tr>
 		</tbody>
 		<thead>
@@ -23,7 +25,7 @@
 		</thead>
 		<tbody>
 				<tr>
-					<td>{{ $article->entry }}</td>					
+					<td></td>					
 				</tr>
 		</tbody>
 	</table>
