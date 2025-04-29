@@ -19,7 +19,7 @@
 				<tr>
 					<td>
 						
-						<a href="{{ route('articles.show', $article) }}" method="GET">{{ $article->id }}</a>						
+						<a href="{{ route('articles.show', $article->id) }}">{{ $article->name }}</a>						
 					<td>{{ $article->created_at }}</td>
 				</tr>
 			@endforeach

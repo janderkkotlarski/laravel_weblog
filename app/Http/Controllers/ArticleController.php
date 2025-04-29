@@ -41,11 +41,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        var_dump($_GET);
-
-        $arr = $_GET;
-
-        return view('articles.show', compact('arr'));
+        return view('articles.show', compact('article'));
     }
 
     /**
