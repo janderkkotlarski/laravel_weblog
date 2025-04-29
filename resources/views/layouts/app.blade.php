@@ -2,6 +2,11 @@
 <html>
 	<head>
 		<title>@yield('title')</title>
+		<style>
+			td {
+				text-align: center;
+			}
+		</style>
 	</head>
 	<body>
 		@include('partials.nav')

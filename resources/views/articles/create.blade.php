@@ -11,7 +11,7 @@
 			<input type="text" id="name" name="name" required>
 			<br>
 			<label for="entry">Tekst:</label>
-			<textarea id="entry" name="entry"></textarea>
+			<textarea id="entry" name="entry" required></textarea>
 			<br>
 			<button type="submit">Opslaan</button>
 	</form>

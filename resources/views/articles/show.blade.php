@@ -27,4 +27,13 @@
 				</tr>
 		</tbody>
 	</table>
+	<form action="{{ route('comments.store') }}" method="POST">
+			@csrf
+			<label id="article_id" name="article_id" value="$article->id">{{ $article->id }}:</label>
+			<br>
+			<label for="entry">Tekst:</label>
+			<textarea id="entry" name="entry" required></textarea>
+			<br>
+			<button type="submit">Opslaan</button>
+	</form>
 @endsection

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Comment;
+
 class CommentController extends Controller
 {
     /**
@@ -27,7 +29,12 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comment = new Comment();
+        $comment->article_id = $request->input('article_id');
+        $comment->entry = $request->input('entry');
+        $comment->save();
+
+        return redirect()->route('articles.overview');
     }
 
     /**
