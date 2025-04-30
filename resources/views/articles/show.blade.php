@@ -28,13 +28,14 @@
 			@endforeach
 		</tbody>
 	</table>
+	<br>
 	<form action="{{ route('comments.store') }}" method="POST">
 			@csrf
-			<label id="article_id" name="article_id" value="$article->id">{{ $article->id }}:</label>
+			<label for="entry"><b>Commentaar</b></label>
 			<br>
-			<label for="entry">Tekst:</label>
+			<input type="hidden" name="article_id" value="{{ $article->id }}">
 			<textarea id="entry" name="entry" required></textarea>
 			<br>
-			<button type="submit" id="article_id" name="article_id" value="$article->id">Opslaan</button>
+			<button type="submit">Opslaan</button>
 	</form>
 @endsection
