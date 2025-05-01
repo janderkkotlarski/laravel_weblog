@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Comment;
+use App\Models\Article;
 
 class CommentController extends Controller
 {
@@ -34,7 +35,9 @@ class CommentController extends Controller
         $comment->entry = $request->input('entry');
         $comment->save();
 
-        return redirect()->route('articles.overview');
+        $article = Article::find($comment->article_id);
+
+        return view('articles.show', compact('article'));
     }
 
     /**
@@ -44,7 +47,6 @@ class CommentController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      */
