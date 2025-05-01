@@ -1,16 +1,15 @@
 @extends('layouts.app')
 
 @section('title')
-	Artikel {{ $article->name }}
+	Artikel	
 @endsection
 
-@section('content')
+@section('content')	
 	<table>
 		<thead>
 			<tr>
-				<th>{{ $article->name }}</th>
+				<th><h1>{{ $article->name }}</h1></th>
 			</tr>
-
 			<tr>
 				<th>{{ $article->entry }}</th>
 			</tr>
