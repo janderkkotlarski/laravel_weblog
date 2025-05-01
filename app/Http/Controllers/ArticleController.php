@@ -16,6 +16,11 @@ class ArticleController extends Controller
         return view('articles.overview', compact('articles'));
     }
 
+    public function login() {
+        
+        return view('articles.login');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

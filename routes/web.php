@@ -9,6 +9,7 @@ use App\Http\Controllers\CommentController;
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.overview');
 Route::get('/articles/{article}/show', [ArticleController::class, 'show'])->name('articles.show');
 Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+Route::get('/articles/login', [ArticleController::class, 'login'])->name('articles.login');
 
 Route::post('/articles/create', [ArticleController::class, 'store'])->name('articles.store');
 

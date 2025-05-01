@@ -22,6 +22,11 @@ class DatabaseSeeder extends Seeder
         ]);
         */
 
+        User::factory()->create([
+            'name' => 'John',
+            'password' => 'Doe',
+        ]);
+
         $this->call([
             ArticleSeeder::class,
             CommentSeeder::class,
