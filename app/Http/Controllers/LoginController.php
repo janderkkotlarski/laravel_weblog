@@ -21,22 +21,7 @@ class LoginController extends Controller
         }
         
         return back()->withErrors([
-            'name' => 'De opgegeven gebruikersnaam is onjuist.',
+            'name' => 'Opgegeven gebruikersnaam en/of wachtwoord is onjuist.',
         ])->onlyInput('name');
-    }
-
-    public function bogus(Request $request): RedirectResponse {
-        $credentials = $request->validate([
-            'name' => ['required'],
-            'password' => ['required'],
-        ]);
-
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended(route('articles.overview'));
-        }
-
-        return back()->withErrors([
-            'name' => 'Opgegeven gebruikersnaam en/of wachtwoord is onjuist.'
-        ]);
-    }
+    }  
 }
