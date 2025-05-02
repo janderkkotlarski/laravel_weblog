@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<form action="{{ route('login.authenticate') }}" method="POST">
+<form action="{{ route('authenticate') }}" method="POST">
 			@csrf
 			<label for="name"><b>Gebruikersnaam</b></label>
 			<textarea id="name" name="name" required></textarea>

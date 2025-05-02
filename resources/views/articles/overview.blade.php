@@ -17,8 +17,7 @@
 		<tbody>
 			@foreach($articles as $article)
 				<tr>
-					<td>
-						
+					<td>						
 						<a href="{{ route('articles.show', $article->id) }}">{{ $article->name }}</a>						
 					<td>{{ $article->created_at }}</td>
 				</tr>

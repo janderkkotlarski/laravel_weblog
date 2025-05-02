@@ -12,6 +12,11 @@ class ArticleController extends Controller
      * Display a listing of the resource.
      */
     public function index() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            dd($_POST);
+        }
+
+
         $articles = Article::orderBy('created_at', 'desc')->get();
         return view('articles.overview', compact('articles'));
     }
@@ -19,6 +24,11 @@ class ArticleController extends Controller
     public function login() {
         
         return view('articles.login');
+    }
+
+    public function bogin() {
+        
+        return view('articles.bogin');
     }
 
     /**
