@@ -13,7 +13,9 @@ use App\Http\Controllers\LoginController;
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.overview');
 Route::get('/articles/{article}/show', [ArticleController::class, 'show'])->name('articles.show');
 Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+Route::get('/user/overview', [UserController::class, 'index'])->name('user.overview');
 Route::get('/user/login', [UserController::class, 'login'])->name('user.login');
+
 
 Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
 Route::post('/articles/create', [ArticleController::class, 'store'])->name('articles.store');

@@ -14,10 +14,12 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        $remember = $request->remember and $request->remember == 1;
+
+        if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
-            return redirect()->intended(route('articles.overview'));
+            return redirect()->intended(route('user.overview'));
         }
         
         return back()->withErrors([
