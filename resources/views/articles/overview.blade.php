@@ -25,10 +25,16 @@
 		</tbody>
 	</table>
 
-	<h1>
-		{{ $info = session()->all() }}
-		{{ var_dump($info) }}
-	</h1>
+	
+	@foreach(session()->all() as $part)
+		<h1>{{ var_dump($part) }}</h1>
+	@endforeach
+
+	
+
+	{{ var_dump(session()->all()) }}
+		
+
 	
 
 @endsection
