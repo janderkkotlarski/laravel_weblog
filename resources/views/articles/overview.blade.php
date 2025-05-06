@@ -24,6 +24,13 @@
 			@endforeach
 		</tbody>
 	</table>
+
+	<h1>
+		{{ $info = session()->all() }}
+		{{ var_dump($info) }}
+	</h1>
+	
+
 @endsection
 		
 

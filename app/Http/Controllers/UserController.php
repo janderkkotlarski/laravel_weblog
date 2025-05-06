@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
@@ -38,9 +39,12 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
+    public function show(Request $request, string $id): View {
+        $value = $request->session()->get('key');
+
+        $user = $this->users->find($id);
+
+        return view('user.profile', ['user' => $user]);
     }
 
     /**
