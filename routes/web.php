@@ -7,13 +7,24 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LoginController;
-
-
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.overview');
 Route::get('/articles/{article}/show', [ArticleController::class, 'show'])->name('articles.show');
 Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
-Route::get('/user/overview', [UserController::class, 'index'])->name('user.overview');
+// Route::get('/user/overview', [UserController::class, 'index'])->name('user.overview');
+
+
+
+
+Route::group(['middleware' => ['auth']], function () {
+	Route::get('/user/overview', [UserController::class, 'index'])->name('user.overview');
+
+	Route::get('auth/user', function() {
+		$user = Auth::user();
+	});
+});
+
 Route::get('/user/login', [UserController::class, 'login'])->name('user.login');
 
 
