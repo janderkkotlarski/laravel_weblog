@@ -27,7 +27,8 @@ class ArticleController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {   
+
         $article = new Article();
         $article->name = $request->input('name');
         $article->entry = $request->input('entry');

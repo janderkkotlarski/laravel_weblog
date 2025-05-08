@@ -28,12 +28,12 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    /*
+   
     protected $hidden = [
         'password',
         'remember_token',
     ];
-    */
+
 
     /**
      * Get the attributes that should be cast.
@@ -43,8 +43,16 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            // 'email_verified_at' => 'datetime',
+            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function articles() {
+        return $this->hasMany(Article::class);
+    }
+
+    public function comments() {
+        return $this->hasMany(Comment::class);
     }
 }

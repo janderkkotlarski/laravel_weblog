@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-	Artikel	
+	Artikel	door {{ $article->user->name }}
 @endsection
 
 @section('content')	

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+use App\Models\User;
 use App\Models\Article;
 
 /**
@@ -18,8 +19,11 @@ class CommentFactory extends Factory
      */
     public function definition(): array
     {
+        $user_id = User::inRandomOrder()->first()->id;
+
         return [
-            'article_id' => Article::inRandomOrder()->first()->id,
+            'user_id' => $user_id,
+            'article_id' => Article::inRandomOrder()->where('user_id', $user_id)->first()->id,
             'entry' => $this->faker->sentence,
         ];
     }

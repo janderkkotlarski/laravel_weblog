@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+use App\Models\User;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Article>
  */
@@ -17,6 +19,7 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => User::inRandomOrder()->first()->id,
             'name' => $this->faker->word,
             'entry' => $this->faker->sentence,
         ];
