@@ -1,7 +1,7 @@
 <nav>
 	<ul>
-		<a href="{{ route('user.login') }}">Log In</a>
-		<a href="{{ route('articles.overview') }}">Artikeloverzicht</a>
-		<a href="{{ route('articles.create') }}">Schrijf Nieuw Artikel</a>		
+		<button type="button"><a href="{{ route('user.login') }}">Log In</a></button>
+		<button type="button"><a href="{{ route('articles.overview') }}">Artikeloverzicht</a></button>
+		<button type="button"><a href="{{ route('articles.create') }}">Schrijf Nieuw Artikel</a></button>
 	</ul>
 </nav>

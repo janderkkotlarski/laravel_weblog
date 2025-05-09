@@ -7,10 +7,12 @@
 @section('content')
 <form action="{{ route('authenticate') }}" method="POST">
 			@csrf
-			<label for="name"><b>Gebruikersnaam</b></label>
+			<label for="name">Gebruikersnaam</label>
+			<br>
 			<input type="text" id="name" name="name" required>			
 			<br>
-			<label for="password"><b>Wachtwoord</b></label>
+			<label for="password">Wachtwoord</label>
+			<br>
 			<input type="password" id="password" name="password" required>
 			<br>
 			@error('name')

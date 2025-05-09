@@ -8,7 +8,7 @@
 	<table>
 		<thead>
 			<tr>
-				<th><h1>{{ $article->name }}</h1></th>
+				<th><button disabled><h1>{{ $article->name }}</h1></button></th>
 			</tr>
 			<tr>
 				<th>{{ $article->entry }}</th>
@@ -30,10 +30,10 @@
 	<br>
 	<form action="{{ route('comments.store') }}" method="POST">
 			@csrf
-			<label for="entry"><b>Commentaar</b></label>
+			<label for="entry">Commentaar</label>
 			<br>
 			<input type="hidden" name="article_id" value="{{ $article->id }}">
-			<textarea id="entry" name="entry" required></textarea>
+			<textarea id="entry" name="entry" required></textarea>	
 			<br>
 			<button type="submit">Opslaan</button>
 	</form>

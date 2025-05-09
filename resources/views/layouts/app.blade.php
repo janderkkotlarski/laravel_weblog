@@ -8,8 +8,9 @@
 		<title>@yield('title')</title>
 		<style>
 			body {
-				color: #f0f0a0;
-				background-color: #207070;
+				font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', sans-serif;
+				color: #f0d0b0;
+				background-color: #206060;
 				padding: 7px;
 				border: 14px;
 				height: 30px;
@@ -26,11 +27,17 @@
 			a {
 				color: #f0a0a0;
 			}
-			nav a {				
+			textarea, input, button {
+				color: #d0f0b0;
 				background-color: #404040;
-				border: 3px solid #303030;
-				border-radius: 20px;	
-				padding: 7px;				
+				border-radius: 20px;
+				padding: 7px;
+			}
+			button h1 {
+				color: #b0d0f0;
+			}
+			label {
+				font-weight: bold;
 			}
 		  
 		</style>

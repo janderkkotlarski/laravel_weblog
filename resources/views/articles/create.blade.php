@@ -7,10 +7,12 @@
 @section('content')
 	<form action="{{ route('articles.store') }}" method="POST">
 			@csrf
-			<label for="name">Titel:</label>
-			<input type="text" id="name" name="name" required>
+			<label for="name">Titel</label>
 			<br>
-			<label for="entry">Tekst:</label>
+			<textarea id="name" name="name" required></textarea>
+			<br>
+			<label for="entry">Tekst</label>
+			<br>
 			<textarea id="entry" name="entry" required></textarea>
 			<br>
 			<button type="submit">Opslaan</button>
