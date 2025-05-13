@@ -31,22 +31,32 @@
 				color: #d0f0b0;
 				background-color: #404040;
 				border-radius: 20px;
-				padding: 7px;
+				padding: 10px;
 			}
 			button h1 {
 				color: #b0d0f0;
+				margin: 20px;				
 			}
 			label {
 				font-weight: bold;
-			}
-		  
+			}		  
 		</style>
 	</head>
 	<body>
-		@include('partials.nav')
+		<table>
+			<tbody>
+				<tr><td></td><td>
+					@include('partials.nav')
+				</td><td></td></tr>
 
-		<h1>@yield('title')</h1>
-
-		@yield('content')
+				<tr><td></td><td>
+					<h1>@yield('title')</h1>
+				</td><td></td></tr>
+			
+				<tr><td></td><td>
+					@yield('content')
+				</td><td></td></tr>
+			</tbody>
+		</table>
 	</body>
 </html>

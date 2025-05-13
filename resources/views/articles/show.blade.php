@@ -4,37 +4,35 @@
 	Artikel	door {{ $article->user->name }}
 @endsection
 
-@section('content')	
-	<table>
-		<thead>
-			<tr>
-				<th><button disabled><h1>{{ $article->name }}</h1></button></th>
-			</tr>
-			<tr>
-				<th>{{ $article->entry }}</th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach($article->comments as $comment)			
-			<tr>
-				<td>&nbsp</td>
-			</tr>
-			<tr>
-				<td>
-						{{ $comment->entry }}
-				</td>
-			</tr>
-			@endforeach
-		</tbody>
-	</table>
+@section('content')
+	<button disabled><h1>{{ $article->name }}</h1></button>
 	<br>
+	<br>
+
+	<b> {{ $article->entry }} </b>
+	<br>
+	<br>
+	<br>
+
+	@foreach($article->comments as $comment)
+		&nbsp
+		{{ $comment->entry }}
+		<br>
+		<br>
+	@endforeach	
+
+	<br>
+
 	<form action="{{ route('comments.store') }}" method="POST">
-			@csrf
-			<label for="entry">Commentaar</label>
-			<br>
-			<input type="hidden" name="article_id" value="{{ $article->id }}">
-			<textarea id="entry" name="entry" required></textarea>	
-			<br>
-			<button type="submit">Opslaan</button>
+		@csrf
+		<label for="entry">Commentaar</label>
+		<input type="hidden" name="article_id" value="{{ $article->id }}">
+		<br>
+		
+		<textarea id="entry" name="entry" required></textarea>	
+		<br>
+		<br>
+		
+		<button type="submit">Opslaan</button>
 	</form>
 @endsection

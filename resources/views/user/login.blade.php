@@ -5,11 +5,13 @@
 @endsection
 
 @section('content')
+
 <form action="{{ route('authenticate') }}" method="POST">
 			@csrf
 			<label for="name">Gebruikersnaam</label>
 			<br>
 			<input type="text" id="name" name="name" required>			
+			<br>
 			<br>
 			<label for="password">Wachtwoord</label>
 			<br>
@@ -19,6 +21,8 @@
 				{{ $message }}
 				<br>
 			@enderror
+			<br>
 			<button type="submit">Inloggen</button>
 	</form>
+
 @endsection

@@ -11,9 +11,11 @@
 			<br>
 			<textarea id="name" name="name" required></textarea>
 			<br>
+			<br>
 			<label for="entry">Tekst</label>
 			<br>
 			<textarea id="entry" name="entry" required></textarea>
+			<br>
 			<br>
 			<button type="submit">Opslaan</button>
 	</form>
