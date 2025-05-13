@@ -22,15 +22,15 @@
 			<td>{{ $article->created_at }}</td>
 		</tr>
 	@endforeach
-
-
 	
-	@foreach(session()->all() as $part)
+	@foreach(session()->all() as $label=>$part)
+		<tr><td></td><td>
+			{{ var_dump($label) }}
+		</td><td></td></tr>
 		<tr><td></td><td>
 			{{ var_dump($part) }}
 		</td><td></td></tr>
-	@endforeach	
-
+	@endforeach
 @endsection
 		
 
