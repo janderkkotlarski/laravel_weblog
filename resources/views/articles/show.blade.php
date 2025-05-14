@@ -6,19 +6,15 @@
 
 @section('content')
 	<button disabled><h1>{{ $article->name }}</h1></button>
-	<br>
-	<br>
+	<br><br>
 
 	<b> {{ $article->entry }} </b>
-	<br>
-	<br>
-	<br>
+	<br><br><br>
 
 	@foreach($article->comments as $comment)
 		&nbsp
 		{{ $comment->entry }}
-		<br>
-		<br>
+		<br><br>
 	@endforeach	
 
 	<br>
@@ -30,8 +26,7 @@
 		<br>
 		
 		<textarea id="entry" name="entry" required></textarea>	
-		<br>
-		<br>
+		<br><br>
 		
 		<button type="submit">Opslaan</button>
 	</form>

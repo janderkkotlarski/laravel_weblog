@@ -21,8 +21,7 @@
 			<td>{{ $article->user->name }}</td>
 			<td>{{ $article->created_at }}</td>
 		</tr>
-	@endforeach
-	
+	@endforeach	
 	
 	@foreach(session()->all() as $label=>$part)
 		<x-middle_row>{{ var_dump($label) }}</x-middle_row>	
