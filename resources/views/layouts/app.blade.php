@@ -45,17 +45,9 @@
 	<body>
 		<table>
 			<tbody>
-				<tr><td></td><td>
-					@include('partials.nav')
-				</td><td></td></tr>
-
-				<tr><td></td><td>
-					<h1>@yield('title')</h1>
-				</td><td></td></tr>
-			
-				<tr><td></td><td>
-					@yield('content')
-				</td><td></td></tr>
+				<x-middle_row>@include('partials.nav')</x-middle_row>
+				<x-middle_row><h1>@yield('title')</h1></x-middle_row>
+				<x-middle_row>@yield('content')</x-middle_row>
 			</tbody>
 		</table>
 	</body>

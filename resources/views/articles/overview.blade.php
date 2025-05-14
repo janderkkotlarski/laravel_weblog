@@ -18,18 +18,15 @@
 					<a href="{{ route('articles.show', $article->id) }}">{{ $article->name }}</a>
 				</button>
 			</td>
-			<td>{{ $article->user->name }}
+			<td>{{ $article->user->name }}</td>
 			<td>{{ $article->created_at }}</td>
 		</tr>
 	@endforeach
 	
+	
 	@foreach(session()->all() as $label=>$part)
-		<tr><td></td><td>
-			{{ var_dump($label) }}
-		</td><td></td></tr>
-		<tr><td></td><td>
-			{{ var_dump($part) }}
-		</td><td></td></tr>
+		<x-middle_row>{{ var_dump($label) }}</x-middle_row>	
+		<x-middle_row>{{ var_dump($part) }}</x-middle_row>
 	@endforeach
 @endsection
 		
