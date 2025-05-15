@@ -23,6 +23,8 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::get('/user/login', [UserController::class, 'login'])->name('user.login');
 
+Route::get('/user/logout', [UserController::class, 'logout'])->name('user.logout');
+
 Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
 Route::post('/articles/create', [ArticleController::class, 'store'])->name('articles.store');
 Route::post('/comments/create', [CommentController::class, 'store'])->name('comments.store');

@@ -10,18 +10,21 @@
 			@csrf
 			<label for="name">Gebruikersnaam</label>
 			<br>
+			
 			<input type="text" id="name" name="name" required>			
-			<br>
-			<br>
+			<br><br>
+
 			<label for="password">Wachtwoord</label>
 			<br>
 			<input type="password" id="password" name="password" required>
 			<br>
+
 			@error('name')
 				{{ $message }}
 				<br>
 			@enderror
 			<br>
+
 			<button type="submit">Inloggen</button>
 	</form>
 

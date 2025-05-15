@@ -25,5 +25,7 @@ class LoginController extends Controller
         return back()->withErrors([
             'name' => 'Opgegeven gebruikersnaam en/of wachtwoord is onjuist.',
         ])->onlyInput('name');
-    }  
+    }
+
+    
 }

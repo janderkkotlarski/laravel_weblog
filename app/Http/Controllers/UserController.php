@@ -11,6 +11,10 @@ class UserController extends Controller
         return view('user.login');
     }
 
+    public function logout() {
+        return view('');
+    }
+
 
     /**
      * Display a listing of the resource.
