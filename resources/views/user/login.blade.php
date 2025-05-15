@@ -6,26 +6,25 @@
 
 @section('content')
 
-<form action="{{ route('authenticate') }}" method="POST">
-			@csrf
-			<label for="name">Gebruikersnaam</label>
-			<br>
-			
-			<input type="text" id="name" name="name" required>			
-			<br><br>
+<x-form action="{{ route('authenticate') }}" method="POST">
+		<label for="name">Gebruikersnaam</label>
+		<br>
+		
+		<input type="text" id="name" name="name" required>			
+		<br><br>
 
-			<label for="password">Wachtwoord</label>
-			<br>
-			<input type="password" id="password" name="password" required>
-			<br>
+		<label for="password">Wachtwoord</label>
+		<br>
+		<input type="password" id="password" name="password" required>
+		<br>
 
-			@error('name')
-				{{ $message }}
-				<br>
-			@enderror
+		@error('name')
+			{{ $message }}
 			<br>
+		@enderror
+		<br>
 
-			<button type="submit">Inloggen</button>
-	</form>
+		<x-button type="submit">Inloggen</x-button>
+</x-form>
 
 @endsection

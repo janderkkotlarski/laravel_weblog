@@ -1,10 +1,11 @@
 @guest
-	<button type="button"><a href="{{ route('user.login') }}">Log In</a></button>
+	<x-button type="button"><a href="{{ route('user.login') }}">Log In</a></x-button>
 @endguest
-<button type="button"><a href="{{ route('articles.overview') }}">Artikeloverzicht</a></button>
-<button type="button"><a href="{{ route('articles.create') }}">Schrijf Nieuw Artikel</a></button>
+<x-button type="button"><a href="{{ route('articles.overview') }}">Artikeloverzicht</a></x-button>
+<x-button type="button"><a href="{{ route('articles.create') }}">Schrijf Nieuw Artikel</a></x-button>
 
 @auth
 	<form action="">
-	<button type="button"><a href="{{ route('user.logout') }}">Log In</a></button>
+	<x-button type="button"><a href="{{ route('user.logout') }}">Log In</a></x-button>
+	</form>
 @endauth
