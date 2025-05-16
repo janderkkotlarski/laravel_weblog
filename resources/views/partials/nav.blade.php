@@ -5,7 +5,8 @@
 <x-button type="button"><a href="{{ route('articles.create') }}">Schrijf Nieuw Artikel</a></x-button>
 
 @auth
-	<form action="">
-		<x-button type="button"><a href="{{ route('user.logout') }}">Log out</a></x-button>
+	<form action="/logout" method="POST">
+		@csrf
+		<x-button type="submit">Log out</x-button>
 	</form>
 @endauth

@@ -10,7 +10,7 @@
 		<label for="name">Gebruikersnaam</label>
 		<br>
 		
-		<input type="text" id="name" name="name" required>			
+		<input type="text" id="name" name="name" value="{{ old('name') }}" required>			
 		<br><br>
 
 		<label for="password">Wachtwoord</label>
