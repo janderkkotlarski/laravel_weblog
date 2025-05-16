@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
@@ -12,9 +15,27 @@ class UserController extends Controller
     }
 
     public function logout() {
-        return view('');
+        return redirect('articles');
     }
 
+    public function authenticate(Request $request): RedirectResponse {
+        $credentials = $request->validate([
+            'name' => ['required'],
+            'password' => ['required'],
+        ]);
+
+        $remember = $request->remember and $request->remember == 1;
+
+        if (Auth::attempt($credentials, $remember)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended(route('user.overview'));
+        }
+        
+        return back()->withErrors([
+            'name' => 'Opgegeven gebruikersnaam en/of wachtwoord is onjuist.',
+        ])->onlyInput('name');
+    }
 
     /**
      * Display a listing of the resource.

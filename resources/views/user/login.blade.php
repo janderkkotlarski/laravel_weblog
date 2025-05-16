@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-
-<x-form action="{{ route('authenticate') }}" method="POST">
+	<form action="{{ route('authenticate') }}" method="POST">
+		@csrf	
 		<label for="name">Gebruikersnaam</label>
 		<br>
 		
@@ -25,6 +25,5 @@
 		<br>
 
 		<x-button type="submit">Inloggen</x-button>
-</x-form>
-
+	</form>
 @endsection

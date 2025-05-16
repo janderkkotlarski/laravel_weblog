@@ -18,6 +18,6 @@
 			<textarea id="entry" name="entry" required></textarea>
 			<br><br>
 			
-			<button type="submit">Opslaan</button>
+			<x-button type="submit">Opslaan</x-button>
 	</form>
 @endsection

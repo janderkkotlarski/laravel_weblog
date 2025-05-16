@@ -6,6 +6,6 @@
 
 @auth
 	<form action="">
-	<x-button type="button"><a href="{{ route('user.logout') }}">Log In</a></x-button>
+		<x-button type="button"><a href="{{ route('user.logout') }}">Log out</a></x-button>
 	</form>
 @endauth

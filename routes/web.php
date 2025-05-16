@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.overview');
@@ -25,7 +24,7 @@ Route::get('/user/login', [UserController::class, 'login'])->name('user.login');
 
 Route::get('/user/logout', [UserController::class, 'logout'])->name('user.logout');
 
-Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
+Route::post('/login', [UserController::class, 'authenticate'])->name('authenticate');
 Route::post('/articles/create', [ArticleController::class, 'store'])->name('articles.store');
 Route::post('/comments/create', [CommentController::class, 'store'])->name('comments.store');
 
