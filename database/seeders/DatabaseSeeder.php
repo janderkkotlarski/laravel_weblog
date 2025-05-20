@@ -32,6 +32,11 @@ class DatabaseSeeder extends Seeder
             'password' => 'Sue',
         ]);
 
+        User::factory()->create([
+            'name' => 'Robot',
+            'password' => 'Self',
+        ]);
+
         $this->call([
             ArticleSeeder::class,
             CommentSeeder::class,

@@ -77,6 +77,8 @@ class UserController extends Controller
 
         return view('user.profile', ['user' => $this->users->find($id)]);
         */
+
+        return view('user.profile');
     }
 
     /**

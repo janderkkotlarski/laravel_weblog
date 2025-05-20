@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-	Jouw artikelen
+	Jouw artikelen, {{ Auth::user()->name }}
 @endsection
 
 @section('content')

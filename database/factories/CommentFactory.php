@@ -23,7 +23,7 @@ class CommentFactory extends Factory
 
         return [
             'user_id' => $user_id,
-            'article_id' => Article::inRandomOrder()->where('user_id', $user_id)->first()->id,
+            'article_id' => Article::inRandomOrder()->first()->id,
             'entry' => $this->faker->sentence,
         ];
     }

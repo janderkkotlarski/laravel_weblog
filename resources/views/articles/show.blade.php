@@ -1,21 +1,21 @@
 @extends('layouts.app')
 
 @section('title')
-	Artikel	door {{ $article->user->name }}
+	Artikel	van {{ $article->user->name }} om {{ $article->created_at }}:
 @endsection
 
 @section('content')
 	<button disabled><h1>{{ $article->name }}</h1></button>
 	<br><br>
 
-	<b> {{ $article->entry }} </b>
+	<b>{{ $article->entry }}</b>
 	<br><br><br>
 
 	@foreach($article->comments as $comment)
 		&nbsp
-		Commentaar door {{ $comment->user->name }}:
+		Commentaar van {{ $comment->user->name }} om {{ $comment->created_at }}:
 		<br>
-		{{ $comment->entry }}
+		<b>{{ $comment->entry }}</b>
 		<br><br>
 	@endforeach	
 

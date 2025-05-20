@@ -27,6 +27,9 @@
 			a {
 				color: #f0a0a0;
 			}
+			b {
+				color: #b0d0f0;
+			}
 			textarea, input, button {
 				color: #d0f0b0;
 				background-color: #404040;
