@@ -13,6 +13,8 @@
 
 	@foreach($article->comments as $comment)
 		&nbsp
+		Commentaar door {{ $comment->user->name }}:
+		<br>
 		{{ $comment->entry }}
 		<br><br>
 	@endforeach	
@@ -28,7 +30,10 @@
 	<form action="{{ route('comments.store') }}" method="POST">
 		@csrf
 		<label for="entry">Commentaar</label>
+
+		<input type="hidden" name="user_id" value="{{ Auth::id() }}">
 		<input type="hidden" name="article_id" value="{{ $article->id }}">
+
 		<br>
 		
 		<textarea id="entry" name="entry" required></textarea>	

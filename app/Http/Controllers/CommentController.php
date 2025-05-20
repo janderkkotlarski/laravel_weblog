@@ -31,6 +31,7 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $comment = new Comment();
+        $comment->user_id = $request->input('user_id');
         $comment->article_id = $request->input('article_id');
         $comment->entry = $request->input('entry');
         $comment->save();

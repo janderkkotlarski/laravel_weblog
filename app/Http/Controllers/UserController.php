@@ -46,11 +46,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $id = Auth::id();
-        $articles = Article::orderBy('created_at', 'desc')->get();
-        return view('articles.overview', compact('articles'));
-
-        return view('user.overview');
+        $articles = Article::orderBy('created_at', 'desc')->where('user_id', Auth::id())->get();
+        return view('user.overview', compact('articles'));
     }
 
     /**
@@ -73,11 +70,13 @@ class UserController extends Controller
      * Display the specified resource.
      */
     public function show(Request $request, string $id): View {
+        /*
         $value = $request->session()->get('key');
 
         $user = $this->users->find($id);
 
-        return view('user.profile', ['user' => $user]);
+        return view('user.profile', ['user' => $this->users->find($id)]);
+        */
     }
 
     /**

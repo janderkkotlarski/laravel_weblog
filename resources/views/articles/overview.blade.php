@@ -14,8 +14,10 @@
 	@foreach($articles as $article)
 		<tr>
 			<td>						
-				<x-button type="button">
-					<a href="{{ route('articles.show', $article->id) }}">{{ $article->name }}</a>
+				<x-button type="button">				
+					<a href="{{ route('articles.show', $article->id) }}">					
+						{{ $article->name }}
+					</a>
 				</x-button>
 			</td>
 			<td>{{ $article->user->name }}</td>
