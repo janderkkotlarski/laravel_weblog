@@ -7,6 +7,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\Article;
+
 
 class UserController extends Controller
 {
@@ -44,6 +46,10 @@ class UserController extends Controller
      */
     public function index()
     {
+        $id = Auth::id();
+        $articles = Article::orderBy('created_at', 'desc')->get();
+        return view('articles.overview', compact('articles'));
+
         return view('user.overview');
     }
 

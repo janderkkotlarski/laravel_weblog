@@ -19,6 +19,12 @@
 
 	<br>
 
+	@auth
+		<br>
+		<h1>{{ Auth::user()->name }} LOGGED IN!</h1>
+		<br>
+	
+
 	<form action="{{ route('comments.store') }}" method="POST">
 		@csrf
 		<label for="entry">Commentaar</label>
@@ -30,4 +36,7 @@
 		
 		<x-button type="submit">Opslaan</x-button>
 	</form>
+
+	@endauth
 @endsection
+
