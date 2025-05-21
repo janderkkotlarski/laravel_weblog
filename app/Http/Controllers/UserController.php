@@ -45,9 +45,16 @@ class UserController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $articles = Article::orderBy('created_at', 'desc')->where('user_id', Auth::id())->get();
-        return view('user.overview', compact('articles'));
+    {   
+        echo 'Reached';
+
+        if (null !== Auth::id()) {
+            $articles = Article::orderBy('created_at', 'desc')->where('user_id', Auth::id())->get();
+            return view('user.overview', compact('articles'));
+        }
+
+        $articles = Article::orderBy('created_at', 'desc')->get();
+        return view('articles.overview', compact('articles'));        
     }
 
     /**
