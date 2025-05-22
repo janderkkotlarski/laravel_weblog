@@ -52,7 +52,7 @@ class ArticleController extends Controller
     public function edit(Article $article)
     {
         if (Auth::guest()) {
-            return redirect('user.login');
+            return redirect('/user/login');
         }
 
         return view('articles.create');

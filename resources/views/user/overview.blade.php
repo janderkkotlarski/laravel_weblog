@@ -22,7 +22,7 @@
 			<td>{{ $article->created_at }}</td>
 			<td>
 				<x-button type="button">
-					<a href="{{ route('articles.edit', $article) }}">Verander</a>
+					Verander
 				</x-button>
 			</td>
 			<td>

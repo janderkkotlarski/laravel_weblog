@@ -1,14 +1,19 @@
 @guest
-	<x-button type="button"><a href="{{ route('user.login') }}">Log In</a></x-button>
+	<a href="{{ route('user.login') }}"><x-button type="button">Log In</x-button></a>
 @endguest
 
-<x-button type="button"><a href="{{ route('articles.overview') }}">Artikeloverzicht</a></x-button>
 
+
+<a href="{{ route('articles.overview') }}"><x-button type="button" :a_link="{{ 'Hello' }}">Artikeloverzicht</x-button></a>
 
 @auth
-	<x-button type="button"><a href="{{ route('user.overview') }}">Jouw Artikelen, {{ Auth::user()->name }}</a></x-button>
-
-	<x-button type="button"><a href="{{ route('articles.create') }}">Schrijf Nieuw Artikel</a></x-button>
+	<a href="{{ route('user.overview') }}">
+		<x-button type="button">Jouw Artikelen, {{ Auth::user()->name }}</x-button>
+	</a>
+	
+	<a href="{{ route('articles.create') }}">
+		<x-button type="button">Schrijf Nieuw Artikel</x-button>
+	</a>
 	
 	<form action="/logout" method="POST">
 		@csrf
