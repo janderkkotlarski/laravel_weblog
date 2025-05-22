@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Article;
 
@@ -48,9 +49,13 @@ class ArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Article $article)
     {
-        //
+        if (Auth::guest()) {
+            return redirect('user.login');
+        }
+
+        return view('articles.create');
     }
 
     /**

@@ -26,12 +26,11 @@ Route::post('/logout', [UserController::class, 'logout']);
 
 Route::post('/login', [UserController::class, 'authenticate'])->name('authenticate');
 
+// Route::get('/articles/create', [ArticleController::class, 'edit'])->name('articles.edit');
+
+ Route::get('/articles/edit', [ArticleController::class, 'edit'])->name('articles.edit');
 
 Route::post('/articles/create', [ArticleController::class, 'store'])->name('articles.store');
 Route::post('/comments/create', [CommentController::class, 'store'])->name('comments.store');
 
 Route::redirect('/', '/articles');
-
-echo 'Goodbye';
-
-// dd(['dumped']);

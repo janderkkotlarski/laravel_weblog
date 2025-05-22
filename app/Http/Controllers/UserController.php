@@ -45,9 +45,7 @@ class UserController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {   
-        echo 'Reached';
-
+    {  
         if (null !== Auth::id()) {
             $articles = Article::orderBy('created_at', 'desc')->where('user_id', Auth::id())->get();
             return view('user.overview', compact('articles'));

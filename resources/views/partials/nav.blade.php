@@ -1,5 +1,3 @@
-dd([12, 13]);
-
 @guest
 	<x-button type="button"><a href="{{ route('user.login') }}">Log In</a></x-button>
 @endguest
