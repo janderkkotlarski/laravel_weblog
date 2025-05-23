@@ -15,8 +15,8 @@
 	@foreach($articles as $article)
 		<tr>
 			<td>						
-				<x-button type="button">
-					<a href="{{ route('articles.show', $article->id) }}">{{ $article->name }}</a>
+				<x-button type="button" a_link="{{ route('articles.show', $article->id) }}">
+					{{ $article->name }}
 				</x-button>
 			</td>
 			<td>{{ $article->created_at }}</td>

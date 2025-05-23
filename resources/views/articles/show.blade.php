@@ -22,26 +22,20 @@
 	<br>
 
 	@auth
-		<br>
-		<h1>{{ Auth::user()->name }} LOGGED IN!</h1>
-		<br>
-	
+		<form action="{{ route('comments.store') }}" method="POST">
+			@csrf
+			<label for="entry">Commentaar</label>
 
-	<form action="{{ route('comments.store') }}" method="POST">
-		@csrf
-		<label for="entry">Commentaar</label>
+			<input type="hidden" name="user_id" value="{{ Auth::id() }}">
+			<input type="hidden" name="article_id" value="{{ $article->id }}">
 
-		<input type="hidden" name="user_id" value="{{ Auth::id() }}">
-		<input type="hidden" name="article_id" value="{{ $article->id }}">
-
-		<br>
-		
-		<textarea id="entry" name="entry" required></textarea>	
-		<br><br>
-		
-		<x-button type="submit">Opslaan</x-button>
-	</form>
-
+			<br>
+			
+			<textarea id="entry" name="entry" required></textarea>	
+			<br><br>
+			
+			<x-button type="submit">Opslaan</x-button>
+		</form>
 	@endauth
 @endsection
 

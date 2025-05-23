@@ -24,7 +24,7 @@
 				border-radius: 20px;	
 				padding: 7px;
 			}
-			a {
+			a button {
 				color: #f0a0a0;
 			}
 			b {
