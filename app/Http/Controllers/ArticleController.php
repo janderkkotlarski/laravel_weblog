@@ -21,6 +21,10 @@ class ArticleController extends Controller
      * Show the form for creating a new resource.
      */
     public function create() {
+        if (Auth::guest()) {
+            return redirect('/user/login');
+        }
+
         return view('articles.create');
     }
 
