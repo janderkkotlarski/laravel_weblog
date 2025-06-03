@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Article;
+use App\Models\Comment;
 
 class ArticleController extends Controller
 {
