@@ -61,15 +61,17 @@ class ArticleController extends Controller
             return redirect('/user/login');
         }
 
-        return view('articles.create');
+        echo $article->user;
+
+        return view('articles.edit', compact('article'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Article $article)
     {
-        //
+        echo "Updating!";
     }
 
     /**

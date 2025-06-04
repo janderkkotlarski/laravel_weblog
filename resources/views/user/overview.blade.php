@@ -21,9 +21,9 @@
 			</td>
 			<td>{{ $article->created_at }}</td>
 			<td>
-				<x-button type="button">
+				<x-button type="button" a_link="{{ route('articles.edit', $article) }}">
 					Verander
-				</x-button>
+				</x-button>				
 			</td>
 			<td>
 				<x-button type="button">

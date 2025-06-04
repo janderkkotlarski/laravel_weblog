@@ -22,13 +22,15 @@ Route::group(['middleware' => ['auth']], function () {
 	});
 });
 
-Route::get('/articles/edit', [ArticleController::class, 'edit'])->name('articles.edit');
+Route::get('/articles/{article}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
 
 Route::post('/logout', [UserController::class, 'logout']);
 
 Route::post('/login', [UserController::class, 'authenticate'])->name('authenticate');
 
 Route::post('/articles/create', [ArticleController::class, 'store'])->name('articles.store');
+Route::post('/articles/edit', [ArticleController::class, 'update'])->name('articles.update');
+
 Route::post('/comments/create', [CommentController::class, 'store'])->name('comments.store');
 
 Route::redirect('/', '/articles');
