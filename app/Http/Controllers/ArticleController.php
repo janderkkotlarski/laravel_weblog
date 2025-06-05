@@ -61,7 +61,7 @@ class ArticleController extends Controller
             return redirect('/user/login');
         }
 
-        echo $article->user;
+        // echo $article->user;
 
         return view('articles.edit', compact('article'));
     }
@@ -69,9 +69,19 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Article $article)
+    public function update(Request $request, Article $article)
     {
-        echo "Updating!";
+        $article->name = $request->input('name');
+        $article->entry = $request->input('entry');
+        $article->save();
+
+        if (null !== Auth::id()) {
+            $articles = Article::orderBy('created_at', 'desc')->where('user_id', Auth::id())->get();
+            return view('user.overview', compact('articles'));
+        }
+
+        $articles = Article::orderBy('created_at', 'desc')->get();
+        return view('articles.overview', compact('articles'));    
     }
 
     /**

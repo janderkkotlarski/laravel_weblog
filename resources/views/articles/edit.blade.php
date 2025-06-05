@@ -5,11 +5,11 @@
 @endsection
 
 @section('content')
-	<form action="{{ route('articles.update') }}" method="POST">
+	<form action="{{ route('articles.update', $article) }}" method="POST">
 			@csrf
+			@method('PATCH')
 			<label for="name">Titel</label>
 			<br>
-
 			<textarea id="name" name="name" required>{{ $article->name }}</textarea>
 			<br><br>
 			<label for="entry">Tekst</label>
