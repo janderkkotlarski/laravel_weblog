@@ -49,9 +49,11 @@
 
 						*/
 
-						inner = {{ route('user.login') }}
+						inner = "{{ route('user.login') }}";
 
-						clicker.innerHTML = "<a href=Geklikt!";
+
+
+						clicker.innerHTML = "<a href='" + inner +  ;
 
 
 					// clicker.classList.add("clicked");
