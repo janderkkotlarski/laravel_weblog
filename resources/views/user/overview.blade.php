@@ -12,6 +12,8 @@
 		<th>Weghalen</th>
 	</tr>
 
+	{{ $delete_id = 0 }}
+
 	@foreach($articles as $article)
 		<tr>
 			<td>						
@@ -26,6 +28,7 @@
 				</x-button>				
 			</td>
 			<td>
+				
 				<x-button type="button">
 					Verwijder
 				</x-button>
