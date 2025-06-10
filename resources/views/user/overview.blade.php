@@ -12,8 +12,6 @@
 		<th>Weghalen</th>
 	</tr>
 
-	{{ $delete_id = 0 }}
-
 	@foreach($articles as $article)
 		<tr>
 			<td>						
@@ -27,9 +25,8 @@
 					Verander
 				</x-button>				
 			</td>
-			<td>
-				
-				<x-button type="button">
+			<td>				
+				<x-button type="button" a_link="{{ route('articles.delete', $article) }}">
 					Verwijder
 				</x-button>
 			</td>

@@ -41,7 +41,7 @@ class ArticleController extends Controller
         $article->entry = $request->input('entry');
         $article->save();
 
-        return redirect()->route('articles.overview');
+        return redirect()->route('user.overview');
     }
 
     /**
@@ -61,8 +61,6 @@ class ArticleController extends Controller
             return redirect('/user/login');
         }
 
-        // echo $article->user;
-
         return view('articles.edit', compact('article'));
     }
 
@@ -75,20 +73,35 @@ class ArticleController extends Controller
         $article->entry = $request->input('entry');
         $article->save();
 
-        if (null !== Auth::id()) {
-            $articles = Article::orderBy('created_at', 'desc')->where('user_id', Auth::id())->get();
-            return view('user.overview', compact('articles'));
+        if (Auth::guest()) {
+            return redirect('/user/login');
+        }
+       
+        $articles = Article::orderBy('created_at', 'desc')->where('user_id', Auth::id())->get();
+        return view('user.overview', compact('articles'));  
+    }
+
+    public function delete(Article $article)
+    {
+        if (Auth::guest()) {
+            return redirect('/user/login');
         }
 
-        $articles = Article::orderBy('created_at', 'desc')->get();
-        return view('articles.overview', compact('articles'));    
+        return view('articles.delete', compact('article'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Article $article)
     {
-        //
+        if (Auth::guest()) {
+            return redirect('/user/login');
+        }
+
+        $article->delete();
+
+        $articles = Article::orderBy('created_at', 'desc')->where('user_id', Auth::id())->get();
+        return view('user.overview', compact('articles'));  
     }
 }
