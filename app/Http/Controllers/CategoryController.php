@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\Category;
+
 class CategoryController extends Controller
 {
     /**
@@ -31,8 +33,16 @@ class CategoryController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+    {  
+        if (Auth::guest()) {
+            return redirect('/user/login');
+        }
+
+        $category = new Category();
+        $category->name = $request->input('name');
+        $category->save();
+
+        return redirect()->route('user.overview');
     }
 
     /**
