@@ -14,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::orderBy('created_at', 'desc')->get();
+        return view('categories.overview', compact('categories'));
     }
 
     /**
@@ -42,7 +43,7 @@ class CategoryController extends Controller
         $category->name = $request->input('name');
         $category->save();
 
-        return redirect()->route('user.overview');
+        return redirect()->route('categories.overview');
     }
 
     /**

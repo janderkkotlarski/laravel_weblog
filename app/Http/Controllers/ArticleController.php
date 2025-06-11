@@ -33,7 +33,10 @@ class ArticleController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {   
+    {  
+        if (Auth::guest()) {
+            return redirect('/user/login');
+        }
 
         $article = new Article();
         $article->user_id = Auth::id();

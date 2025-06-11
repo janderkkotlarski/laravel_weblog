@@ -10,6 +10,8 @@ class Category extends Model
     /** @use HasFactory<\Database\Factories\CategoryFactory> */
     use HasFactory;
 
+    // protected $with = ['article'];
+
     public function articles() {
         return $this->belongsToMany(Article::class);
     }

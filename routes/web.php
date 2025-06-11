@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.overview');
 Route::get('/articles/{article}/show', [ArticleController::class, 'show'])->name('articles.show');
 
-
 Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
 Route::get('/articles/{article}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
 Route::get('/articles/{article}/delete', [ArticleController::class, 'delete'])->name('articles.delete');
 Route::get('/articles/{article}/destroy', [ArticleController::class, 'destroy'])->name('articles.destroy');
 
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.overview');
 Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
 
 Route::get('/user/login', [UserController::class, 'login'])->name('user.login');
