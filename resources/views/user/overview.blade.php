@@ -31,5 +31,16 @@
 				</x-button>
 			</td>
 		</tr>
-	@endforeach		
+	@endforeach
+	
+	<tr><td><br><br></td></tr>
+
+	<tr>
+		<td></td>
+		<td>				
+			<x-button type="button" a_link="{{ route('categories.create') }}">
+				Maak Nieuwe Categorie
+			</x-button>
+		</td>
+	</tr>
 @endsection
