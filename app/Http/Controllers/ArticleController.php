@@ -40,13 +40,22 @@ class ArticleController extends Controller
             return redirect('/user/login');
         }
 
+        echo $request->input('id');
+
+        $categories = [$request->input('id')];
+
+        /*
         $article = new Article();
         $article->user_id = Auth::id();
         $article->name = $request->input('name');
         $article->entry = $request->input('entry');
         $article->save();
 
-        return redirect()->route('user.overview');
+        $article->categories()->attach($categories);
+
+        */
+
+        // return redirect()->route('user.overview');
     }
 
     /**
