@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Article;
-use App\Models\Comment;
+use App\Models\Category;
 
 class ArticleController extends Controller
 {
@@ -26,7 +26,9 @@ class ArticleController extends Controller
             return redirect('/user/login');
         }
 
-        return view('articles.create');
+        $categories = Category::orderBy('created_at', 'desc')->get();
+
+        return view('articles.create', compact('categories'));
     }
 
     /**

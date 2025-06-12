@@ -17,6 +17,12 @@
 
 			<textarea id="entry" name="entry" required></textarea>
 			<br><br>
+
+			<select id="category" name="category">
+				@foreach($categories as $category)
+					<option value="{{ $category->name }}">{{ $category->name }}</option>
+				@endforeach
+			</select>
 			
 			<x-button type="submit">Opslaan</x-button>
 	</form>
