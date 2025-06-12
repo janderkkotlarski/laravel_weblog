@@ -14,7 +14,11 @@
 	@foreach($categories as $category)
 		<tr>
 			<td>{{ $category->name }}</td>
-            <td>{{ $category->articles()->get() }} </td>
+            <td>
+				@foreach($category->articles as $article)
+					[{{ $article->id }}]
+				@endforeach
+			</td>
             <td>{{ $category->created_at }}</td>
 		</tr>
 	@endforeach

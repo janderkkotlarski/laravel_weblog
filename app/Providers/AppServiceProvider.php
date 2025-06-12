@@ -24,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
 
         Model::preventLazyLoading();
 
+        Model::automaticallyEagerLoadRelationships();
+
         Authenticate::redirectUsing(function ($request) {
             return route('user.login');
         });
