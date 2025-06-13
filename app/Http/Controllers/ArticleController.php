@@ -14,8 +14,19 @@ class ArticleController extends Controller
      * Display a listing of the resource.
      */
     public function index() {
+        $cat_id = 0;
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            var_dump($_POST);
+
+            $cat_id = htmlspecialchars($_POST["id"]);
+        }
+
+        echo "<br>" . $cat_id . "<br>";
+
         $articles = Article::orderBy('created_at', 'desc')->get();
-        return view('articles.overview', compact('articles'));
+        $categories = Category::orderBy('id', 'asc')->get();
+        return view('articles.overview')->with(compact('articles'))->with(compact('categories'));
     }
 
     /**

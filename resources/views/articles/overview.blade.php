@@ -5,6 +5,22 @@
 @endsection
 
 @section('content')
+	<x-middle_row>
+		<form action="{{ route('articles.filter') }}" method="POST">
+				@csrf
+				<label for="entry">Categoriefilter</label>
+				<br>
+				<select id="id" name="id">
+					@foreach($categories as $category)
+						<option value="{{ $category->id }}">{{ $category->name }}</option>
+					@endforeach
+				</select>
+				<br>
+				<x-button type="submit">Opslaan</x-button>
+		</form>
+		<br>
+	</x-middle_row>
+
 	<tr>
 		<th>Naam</th>
 		<th>Gebruikersnaam</th>
