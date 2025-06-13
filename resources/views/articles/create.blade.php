@@ -18,7 +18,7 @@
 			<textarea id="entry" name="entry" required></textarea>
 			<br><br>
 
-			<select id="id" name="id" multiple>
+			<select id="id" name="id[]" multiple>
 				@foreach($categories as $category)
 					<option value="{{ $category->id }}">{{ $category->name }}</option>
 				@endforeach

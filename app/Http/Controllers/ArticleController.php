@@ -31,7 +31,7 @@ class ArticleController extends Controller
         return view('articles.create', compact('categories'));
     }
 
-    /**
+    /**s
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -40,11 +40,8 @@ class ArticleController extends Controller
             return redirect('/user/login');
         }
 
-        echo $request->input('id');
+        $categories = $request->id;
 
-        $categories = [$request->input('id')];
-
-        /*
         $article = new Article();
         $article->user_id = Auth::id();
         $article->name = $request->input('name');
@@ -53,9 +50,7 @@ class ArticleController extends Controller
 
         $article->categories()->attach($categories);
 
-        */
-
-        // return redirect()->route('user.overview');
+        return redirect()->route('user.overview');
     }
 
     /**
@@ -83,16 +78,19 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
+        if (Auth::guest()) {
+            return redirect('/user/login');
+        }
+
+        $categories = $request->id;
+
         $article->name = $request->input('name');
         $article->entry = $request->input('entry');
         $article->save();
 
-        if (Auth::guest()) {
-            return redirect('/user/login');
-        }
-       
-        $articles = Article::orderBy('created_at', 'desc')->where('user_id', Auth::id())->get();
-        return view('user.overview', compact('articles'));  
+        $article->categories()->attach($categories);       
+
+        return redirect()->route('user.overview');
     }
 
     public function delete(Article $article)
@@ -115,7 +113,6 @@ class ArticleController extends Controller
 
         $article->delete();
 
-        $articles = Article::orderBy('created_at', 'desc')->where('user_id', Auth::id())->get();
-        return view('user.overview', compact('articles'));  
+        return redirect()->route('user.overview');
     }
 }
