@@ -17,14 +17,16 @@ class ArticleController extends Controller
         $cat_id = 0;
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            var_dump($_POST);
-
             $cat_id = htmlspecialchars($_POST["id"]);
         }
 
-        echo "<br>" . $cat_id . "<br>";
-
         $articles = Article::orderBy('created_at', 'desc')->get();
+
+        if ($cat_id > 0) {
+            $articles = Article::orderBy('created_at', 'desc')->whereHas('categories', function($query) use($cat_id) {
+                $query->where('categories.id', $cat_id);
+            })->get();
+        }
         $categories = Category::orderBy('id', 'asc')->get();
         return view('articles.overview')->with(compact('articles'))->with(compact('categories'));
     }
