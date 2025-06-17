@@ -15,8 +15,8 @@ class ArticleController extends Controller
      */
     public function index() {
         $cat_id = 0;
-
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        
+        if(isset($_POST)) {
             $cat_id = htmlspecialchars($_POST["id"]);
         }
 
@@ -83,7 +83,9 @@ class ArticleController extends Controller
             return redirect('/user/login');
         }
 
-        return view('articles.edit', compact('article'));
+        $categories = Category::orderBy('created_at', 'desc')->get();
+
+        return view('articles.edit')->with(compact('article'))->with(compact('categories'));
     }
 
     /**

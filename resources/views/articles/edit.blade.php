@@ -23,6 +23,9 @@
 					<option value="{{ $category->id }}">{{ $category->name }}</option>
 				@endforeach
 			</select>
+
+			<label for="file">Plaatje</label>
+			<input type="file" name="fileToUpload" id="fileToUpload">
 			
 			<x-button type="submit">Opslaan</x-button>
 	</form>
