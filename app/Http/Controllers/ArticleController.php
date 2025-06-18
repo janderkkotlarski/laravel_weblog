@@ -100,7 +100,9 @@ class ArticleController extends Controller
 
         $categories = $request->id;
 
-        var_dump($request->fileToUpload);
+        // var_dump($request->fileToUpload);
+
+        Storage::put('file.png', $request->fileToUpload());
 
         /*
         $request->validate([
