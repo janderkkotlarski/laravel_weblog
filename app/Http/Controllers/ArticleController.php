@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\Article;
 use App\Models\Category;
@@ -16,7 +17,7 @@ class ArticleController extends Controller
     public function index() {
         $cat_id = 0;
         
-        if(isset($_POST)) {
+        if(isset($_POST["id"])) {
             $cat_id = htmlspecialchars($_POST["id"]);
         }
 
@@ -99,6 +100,20 @@ class ArticleController extends Controller
 
         $categories = $request->id;
 
+        var_dump($request->fileToUpload);
+
+        /*
+        $request->validate([
+            'fileToUpload' => 'required|mimes:pdf,xlx,csv|max:2048',
+        ]);
+        
+        $fileName = time().'.'.$request->fileToUpload->extension();  
+         
+        $request->fileToUpload->move(public_path('uploads'), $fileName);
+       
+        $request->fileToUpload->storeAs('uploads', $fileName);
+        */
+        
         $article->name = $request->input('name');
         $article->entry = $request->input('entry');
         $article->save();
