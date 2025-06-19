@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-	<form action="{{ route('articles.update', $article) }}" method="POST">
+	<form action="{{ route('articles.update', $article) }}" method="POST" enctype="multipart/form-data">
 			@csrf
 			@method('PATCH')
 			<label for="name">Titel</label>
@@ -26,7 +26,7 @@
 
 			<label for="file">Plaatje</label>
 			<input type="file" name="fileToUpload" id="fileToUpload">
-			
 			<x-button type="submit">Opslaan</x-button>
+			
 	</form>
 @endsection

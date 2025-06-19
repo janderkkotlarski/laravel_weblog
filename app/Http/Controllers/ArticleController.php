@@ -98,23 +98,18 @@ class ArticleController extends Controller
             return redirect('/user/login');
         }
 
+        
+
         $categories = $request->id;
 
-        // var_dump($request->fileToUpload);
+        $resource = $request->fileToUpload;
 
-        Storage::put('file.png', $request->fileToUpload());
+        Storage::disk('public')->put('example.txt', 'Hello world...');
+        // Storage::disk('local')->put('example.jpg', $resource);
 
-        /*
-        $request->validate([
-            'fileToUpload' => 'required|mimes:pdf,xlx,csv|max:2048',
-        ]);
-        
-        $fileName = time().'.'.$request->fileToUpload->extension();  
-         
-        $request->fileToUpload->move(public_path('uploads'), $fileName);
-       
-        $request->fileToUpload->storeAs('uploads', $fileName);
-        */
+        // Storage::put('file.txt', 'Moar');
+        Storage::put('test.jpg', $request->fileToUpload);
+        //  Storage::disk('public')->put('', $resource);
         
         $article->name = $request->input('name');
         $article->entry = $request->input('entry');
