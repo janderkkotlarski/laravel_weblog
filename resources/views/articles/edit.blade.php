@@ -25,7 +25,7 @@
 			</select>
 
 			<label for="file">Plaatje</label>
-			<input type="file" name="fileToUpload" id="fileToUpload">
+			<input type="file" accept=".jpg,.jpeg,.png" name="fileToUpload" id="fileToUpload">
 			<x-button type="submit">Opslaan</x-button>
 			
 	</form>

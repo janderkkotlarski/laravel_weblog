@@ -98,7 +98,9 @@ class ArticleController extends Controller
             return redirect('/user/login');
         }
 
-        
+        $request->validate([
+            'fileToUpload' => 'required|max:2048'
+        ]);
 
         $categories = $request->id;
 
@@ -110,10 +112,12 @@ class ArticleController extends Controller
         );
         */
 
-        $fileName = time() .'.'. $request->fileToUpload->extension();
+        
+
+        $fileName = time() .'.'. $resource->extension();
 
         Storage::putFileAs(
-            'images', $request->fileToUpload, $fileName
+            'images', $resource, $fileName
         );
 
         // Storage::putFile('images', $request->fileToUpload);
