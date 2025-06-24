@@ -110,7 +110,13 @@ class ArticleController extends Controller
         );
         */
 
-        Storage::putFile('images', $request->fileToUpload);
+        $fileName = time() .'.'. $request->fileToUpload->extension();
+
+        Storage::putFileAs(
+            'images', $request->fileToUpload, $fileName
+        );
+
+        // Storage::putFile('images', $request->fileToUpload);
 
         // Storage::disk('public')->put('example.txt', 'Hello world...');
         // Storage::disk('local')->put('example.jpg', $resource);
