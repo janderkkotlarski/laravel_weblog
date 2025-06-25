@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\File;
 
 class ArticleController extends Controller
 {
@@ -98,42 +99,34 @@ class ArticleController extends Controller
             return redirect('/user/login');
         }
 
-        $request->validate([
-            'fileToUpload' => 'required|max:2048'
-        ]);
-
-        $categories = $request->id;
-
         $resource = $request->fileToUpload;
-
-        /*
-        $path = $request->file($resource)->storeAs(
-            'images', $request->user()->id
-        );
-        */
-
+  
         
 
-        $fileName = time() .'.'. $resource->extension();
-
-        Storage::putFileAs(
-            'images', $resource, $fileName
-        );
-
-        // Storage::putFile('images', $request->fileToUpload);
-
-        // Storage::disk('public')->put('example.txt', 'Hello world...');
-        // Storage::disk('local')->put('example.jpg', $resource);
-
-        // Storage::put('file.txt', 'Moar');
-        // Storage::put('test.jpg', $request->fileToUpload);
-        //  Storage::disk('public')->put('', $resource);
+        
+        
         
         $article->name = $request->input('name');
         $article->entry = $request->input('entry');
         $article->save();
 
-        $article->categories()->attach($categories);       
+        $categories = $request->id;
+
+        $article->categories()->attach($categories);
+
+        if ($request->file('fileToUpload')) {
+            $uploadPath = public_path('images');
+            $fileName = time() .'.'. $resource->extension();
+            $request->fileToUpload->move($uploadPath, $fileName);
+
+            $file = new File();
+            $file->user_id = Auth::id();
+            $file->article_id = $article->id;
+            $file->name = $fileName;
+            $file->file_path = $uploadPath . '\\' . $fileName;
+
+            $file->save();
+        }
 
         return redirect()->route('user.overview');
     }
