@@ -11,6 +11,14 @@
 	<b>{{ $article->entry }}</b>
 	<br><br><br>
 
+	@foreach($article->files as $file)
+		&nbsp
+		{{ $file->file_path }}
+		<img src="{{ $file->file_path }}" alt="{{ $file->name }}">
+		<br>
+	@endforeach
+
+
 	@foreach($article->comments as $comment)
 		&nbsp
 		Commentaar van {{ $comment->user->name }} om {{ $comment->created_at }}:
