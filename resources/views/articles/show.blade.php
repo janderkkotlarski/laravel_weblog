@@ -14,7 +14,9 @@
 	@foreach($article->files as $file)
 		&nbsp
 		{{ $file->file_path }}
-		<img src="{{ $file->file_path }}" alt="{{ $file->name }}">
+
+		{{ asset($file->file_path) }}
+		<img src="{{ asset($file->file_path) }}" alt="{{ $file->name }}">
 		<br>
 	@endforeach
 

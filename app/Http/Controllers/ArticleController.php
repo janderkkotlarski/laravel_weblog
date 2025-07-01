@@ -108,18 +108,20 @@ class ArticleController extends Controller
         $article->categories()->attach($categories);
 
         if ($request->file('fileToUpload')) {
-            // $uploadPath = public_path('images');
-            // $fileName = time() .'.'. $request->fileToUpload->extension();
-            // $request->fileToUpload->move($uploadPath, $fileName);
+            $uploadPath = public_path('images');
+            $fileName = time() .'.'. $request->fileToUpload->extension();
+            $path = $request->fileToUpload->move($uploadPath, $fileName);
 
-            $path = $request->file('fileToUpload')->store();
+            //  = $request->file('fileToUpload')->store();
 
 
             $file = new File();
             $file->user_id = Auth::id();
             $file->article_id = $article->id;
-            $file->name = ""; //$fileName;
+            $file->name = $fileName;
             $file->file_path = $path;
+
+           
 
             $file->save();
         }
