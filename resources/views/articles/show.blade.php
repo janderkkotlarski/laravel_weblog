@@ -15,8 +15,8 @@
 		&nbsp
 		{{ $file->file_path }}
 
-		{{ asset($file->file_path) }}
-		<img src="{{ asset($file->file_path) }}" alt="{{ $file->name }}">
+		{{ asset(storage_path() . "d") }}
+		<img src="{{ asset(storage_path() . '\app\public\' . $file->file_path) }}" alt="{{ $file->name }}">
 		<br>
 	@endforeach
 

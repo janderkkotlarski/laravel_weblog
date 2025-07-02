@@ -117,21 +117,25 @@ class ArticleController extends Controller
 
             // dd(file_get_contents($cargo));
 
-            Storage::disk('public')->put($fileName, $cargo);
+            // dd();
+
+            Storage::disk('public')->put($fileName, $cargo, 'public');
+
+            
 
             // dd($storagePath);
 
             // $path = $request->fileToUpload->//move($storagePath, $fileName);
 
-            // $file = new File();
-            // $file->user_id = Auth::id();
-            // $file->article_id = $article->id;
-            // $file->name = $fileName;
-            // $file->file_path = $path;
+            $file = new File();
+            $file->user_id = Auth::id();
+            $file->article_id = $article->id;
+            $file->name = $fileName;
+            $file->file_path = $fileName;
 
         
 
-            // $file->save();
+            $file->save();
         }
 
         return redirect()->route('user.overview');
