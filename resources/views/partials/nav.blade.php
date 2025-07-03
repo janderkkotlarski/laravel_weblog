@@ -7,6 +7,8 @@
 @auth
 	<x-button type="button" a_link="{{ route('user.overview') }}">Jouw Artikelen, {{ Auth::user()->name }}</x-button>
 
+	<x-button type="button" a_link="{{ route('user.premium') }}">Premium Artikelen</x-button>
+
 	<x-button type="button" a_link="{{ route('articles.create') }}">Schrijf Nieuw Artikel</x-button>
 
 	<form action="/logout" method="POST">

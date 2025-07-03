@@ -74,24 +74,17 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, string $id): View {
-        /*
-        $value = $request->session()->get('key');
-
-        $user = $this->users->find($id);
-
-        return view('user.profile', ['user' => $this->users->find($id)]);
-        */
-
-        return view('user.profile');
+    public function show()
+    {
+        return view('user.premium');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit()
     {
-        //
+        echo 'Hello!';
     }
 
     /**

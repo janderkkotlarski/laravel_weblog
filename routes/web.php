@@ -21,6 +21,7 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('categorie
 Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
 
 Route::get('/user/login', [UserController::class, 'login'])->name('user.login');
+Route::get('/user/premium', [UserController::class, 'show'])->name('user.premium');
 
 Route::group(['middleware' => ['auth']], function () {
 	Route::get('/user/overview', [UserController::class, 'index'])->name('user.overview');	
@@ -38,5 +39,6 @@ Route::post('/articles', [ArticleController::class, 'index'])->name('articles.fi
 Route::post('/articles/create', [ArticleController::class, 'store'])->name('articles.store');
 Route::post('/comments/create', [CommentController::class, 'store'])->name('comments.store');
 Route::post('/categories/create', [CategoryController::class, 'store'])->name('categories.store');
+Route::post('/user/edit', [UserController::class, 'edit'])->name('user.edit');
 
 Route::redirect('/', '/articles');
