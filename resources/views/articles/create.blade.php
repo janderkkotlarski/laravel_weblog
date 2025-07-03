@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-	<form action="{{ route('articles.store') }}" method="POST">
+	<form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
 			@csrf
 			<label for="name">Titel</label>
 			<br>
@@ -23,6 +23,9 @@
 					<option value="{{ $category->id }}">{{ $category->name }}</option>
 				@endforeach
 			</select>
+
+			<label for="file">Plaatje</label>
+			<input type="file" name="fileToUpload" id="fileToUpload">
 			
 			<x-button type="submit">Opslaan</x-button>
 	</form>

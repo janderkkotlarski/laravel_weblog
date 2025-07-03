@@ -53,9 +53,7 @@ class ArticleController extends Controller
     {  
         if (Auth::guest()) {
             return redirect('/user/login');
-        }
-
-        $categories = $request->id;
+        }        
 
         $article = new Article();
         $article->user_id = Auth::id();
@@ -63,7 +61,21 @@ class ArticleController extends Controller
         $article->entry = $request->input('entry');
         $article->save();
 
+        $categories = $request->id;
+
         $article->categories()->attach($categories);
+
+        if ($request->file('fileToUpload')) {
+            $path = $request->fileToUpload->store('images', 'public');
+
+            $file = new File();
+            $file->user_id = Auth::id();
+            $file->article_id = $article->id;
+            $file->name = $path;
+            $file->file_path = 'storage\\' . $path;        
+
+            $file->save();
+        }
 
         return redirect()->route('user.overview');
     }
@@ -108,24 +120,13 @@ class ArticleController extends Controller
         $article->categories()->attach($categories);
 
         if ($request->file('fileToUpload')) {
-            
-            // $fileName = time() .'.'. $request->fileToUpload->extension();
-
-            // $cargo = file_get_contents($request->fileToUpload);
-
-            // Storage::disk('')->put($fileName, $cargo, 'public');
-
-            // Storage::put($fileName, $cargo, 'public');
-
             $path = $request->fileToUpload->store('images', 'public');
 
             $file = new File();
             $file->user_id = Auth::id();
             $file->article_id = $article->id;
             $file->name = $path;
-            $file->file_path = 'storage\\' . $path;
-
-        
+            $file->file_path = 'storage\\' . $path;        
 
             $file->save();
         }
