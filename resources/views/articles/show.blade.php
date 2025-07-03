@@ -12,11 +12,9 @@
 	<br><br><br>
 
 	@foreach($article->files as $file)
-		&nbsp
-		{{ $file->file_path }}
-
-		{{ asset(storage_path() . "d") }}
-		<img src="{{ asset(storage_path() . '\app\public\' . $file->file_path) }}" alt="{{ $file->name }}">
+		&nbsp		
+		
+		<img src="{{ asset($file->file_path) }}" alt="{{ $file->name }}">
 		<br>
 	@endforeach
 

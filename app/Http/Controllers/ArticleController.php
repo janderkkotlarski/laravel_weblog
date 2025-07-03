@@ -109,29 +109,21 @@ class ArticleController extends Controller
 
         if ($request->file('fileToUpload')) {
             
-            $fileName = time() .'.'. $request->fileToUpload->extension();
+            // $fileName = time() .'.'. $request->fileToUpload->extension();
 
-            // Storage::put('', $request->fileToUpload);
+            // $cargo = file_get_contents($request->fileToUpload);
 
-            $cargo = file_get_contents($request->fileToUpload);
+            // Storage::disk('')->put($fileName, $cargo, 'public');
 
-            // dd(file_get_contents($cargo));
+            // Storage::put($fileName, $cargo, 'public');
 
-            // dd();
-
-            Storage::disk('public')->put($fileName, $cargo, 'public');
-
-            
-
-            // dd($storagePath);
-
-            // $path = $request->fileToUpload->//move($storagePath, $fileName);
+            $path = $request->fileToUpload->store('images', 'public');
 
             $file = new File();
             $file->user_id = Auth::id();
             $file->article_id = $article->id;
-            $file->name = $fileName;
-            $file->file_path = $fileName;
+            $file->name = $path;
+            $file->file_path = 'storage\\' . $path;
 
         
 
