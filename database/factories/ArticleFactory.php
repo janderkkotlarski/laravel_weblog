@@ -22,6 +22,7 @@ class ArticleFactory extends Factory
             'user_id' => User::inRandomOrder()->first()->id,
             'name' => $this->faker->word,
             'entry' => $this->faker->sentence,
+            'premium' => $this->faker->numberBetween(0, 1), // boolean can be all kinds of integers in the mysql database, kek
         ];
     }
 }

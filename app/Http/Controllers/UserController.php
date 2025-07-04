@@ -8,6 +8,7 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Article;
+use App\Models\User;
 
 
 class UserController extends Controller
@@ -52,6 +53,7 @@ class UserController extends Controller
         }
 
         $articles = Article::orderBy('created_at', 'desc')->get();
+
         return view('articles.overview', compact('articles'));        
     }
 
@@ -76,15 +78,29 @@ class UserController extends Controller
      */
     public function show()
     {
+        if (Auth::guest()) {
+            return redirect('/user/login');
+        }
+
         return view('user.premium');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit()
+    public function edit(Request $request)
     {
-        echo 'Hello!';
+        if (Auth::guest()) {
+            return redirect('/user/login');
+        }
+
+        $user = User::find(Auth::id());        
+
+        $user->premium = $request->payment;
+
+        $user->save();
+
+        return view('user.premium');
     }
 
     /**

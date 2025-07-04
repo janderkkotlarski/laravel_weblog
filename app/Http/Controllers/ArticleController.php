@@ -24,12 +24,16 @@ class ArticleController extends Controller
 
         $articles = Article::orderBy('created_at', 'desc')->get();
 
+        
+
         if ($cat_id > 0) {
             $articles = Article::orderBy('created_at', 'desc')->whereHas('categories', function($query) use($cat_id) {
                 $query->where('categories.id', $cat_id);
             })->get();
         }
+
         $categories = Category::orderBy('id', 'asc')->get();
+
         return view('articles.overview')->with(compact('articles'))->with(compact('categories'));
     }
 

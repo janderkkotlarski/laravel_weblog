@@ -26,6 +26,7 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'password' => static::$password ??= Hash::make('password'),
+            'premium' => false, // just a zero in the database, but let's pretend
         ];
 
         /*

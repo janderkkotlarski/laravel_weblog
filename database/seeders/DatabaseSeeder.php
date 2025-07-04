@@ -25,16 +25,19 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'John',
             'password' => 'Doe',
+            // 'premium' => false,
         ]);
 
         User::factory()->create([
             'name' => 'Mary',
             'password' => 'Sue',
+            // 'premium' => false,
         ]);
 
         User::factory()->create([
             'name' => 'Robot',
             'password' => 'Self',
+            // 'premium' => false,
         ]);
 
         $this->call([
