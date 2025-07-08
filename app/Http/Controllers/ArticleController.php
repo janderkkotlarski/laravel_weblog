@@ -108,9 +108,12 @@ class ArticleController extends Controller
             return redirect('/user/login');
         }
 
+ 
+        $user = User::where('id', Auth::id())->first();
+
         $categories = Category::orderBy('created_at', 'desc')->get();
 
-        return view('articles.edit')->with(compact('article'))->with(compact('categories'));
+        return view('articles.edit')->with(compact('article'))->with(compact('user'))->with(compact('categories'));
     }
 
     /**
@@ -124,6 +127,7 @@ class ArticleController extends Controller
         
         $article->name = $request->input('name');
         $article->entry = $request->input('entry');
+        $article->premium = $request->input('premium');
         $article->save();
 
         $categories = $request->id;

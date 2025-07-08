@@ -24,6 +24,16 @@
 				@endforeach
 			</select>
 
+			<br><br>
+
+			@if($user->premium)
+				<input type="checkbox" id="premium" name="premium" value=1>
+				<label for="premium">Premium?</label>
+				
+				<br><br>
+			@endif
+
+
 			<label for="file">Plaatje</label>
 			<input type="file" name="fileToUpload" id="fileToUpload">
 			<x-button type="submit">Opslaan</x-button>
