@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\File;
+use App\Models\User;
 
 class ArticleController extends Controller
 {
@@ -24,7 +25,13 @@ class ArticleController extends Controller
 
         $articles = Article::orderBy('created_at', 'desc')->get();
 
-        
+        $premium = 0;
+
+        if (null !== Auth::id()) {
+            $user = User::where('id', Auth::id())->first();
+
+            $premium = $user->premium;
+        }
 
         if ($cat_id > 0) {
             $articles = Article::orderBy('created_at', 'desc')->whereHas('categories', function($query) use($cat_id) {
