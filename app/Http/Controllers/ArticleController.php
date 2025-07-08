@@ -23,8 +23,6 @@ class ArticleController extends Controller
             $cat_id = htmlspecialchars($_POST["id"]);
         }
 
-        $articles = Article::orderBy('created_at', 'desc')->get();
-
         $premium = 0;
 
         if (null !== Auth::id()) {
@@ -32,6 +30,8 @@ class ArticleController extends Controller
 
             $premium = $user->premium;
         }
+
+        $articles = $premium ? Article::orderBy('created_at', 'desc')->get() : Article::orderBy('created_at', 'desc')->where('premium', 0 )->get();
 
         if ($cat_id > 0) {
             $articles = Article::orderBy('created_at', 'desc')->whereHas('categories', function($query) use($cat_id) {

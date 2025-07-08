@@ -82,7 +82,12 @@ class UserController extends Controller
             return redirect('/user/login');
         }
 
-        return view('user.premium');
+        
+        $user = User::where('id', Auth::id())->first();
+
+        $articles = $user->premium ? Article::orderBy('created_at', 'desc')->where('premium', 1 )->get() : [];
+
+        return view('user.premium')->with(compact('articles'))->with(compact('user'));
     }
 
     /**
@@ -100,7 +105,9 @@ class UserController extends Controller
 
         $user->save();
 
-        return view('user.premium');
+        $articles = $user->premium ? Article::orderBy('created_at', 'desc')->where('premium', 1 )->get() : [];
+
+        return view('user.premium')->with(compact('articles'))->with(compact('user'));
     }
 
     /**
