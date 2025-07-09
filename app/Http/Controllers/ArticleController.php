@@ -52,9 +52,11 @@ class ArticleController extends Controller
             return redirect('/user/login');
         }
 
+        $user = User::where('id', Auth::id())->first();
+
         $categories = Category::orderBy('created_at', 'desc')->get();
 
-        return view('articles.create', compact('categories'));
+        return view('articles.create')->with(compact('user'))->with(compact('categories'));;
     }
 
     /**s
@@ -70,6 +72,7 @@ class ArticleController extends Controller
         $article->user_id = Auth::id();
         $article->name = $request->input('name');
         $article->entry = $request->input('entry');
+        $article->premium = $request->input('premium');
         $article->save();
 
         $categories = $request->id;

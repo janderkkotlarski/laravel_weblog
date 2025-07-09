@@ -27,6 +27,7 @@
 			<br><br>
 
 			@if($user->premium)
+				<input type="hidden" id="premium" name="premium" value=0>
 				<input type="checkbox" id="premium" name="premium" value=1>
 				<label for="premium">Premium?</label>
 				
