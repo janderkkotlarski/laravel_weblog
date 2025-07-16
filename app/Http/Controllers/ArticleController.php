@@ -26,7 +26,7 @@ class ArticleController extends Controller
         $premium = 0;
 
         if (null !== Auth::id()) {
-            $user = User::where('id', Auth::id())->first();
+            $user = Auth::user();
 
             $premium = $user->premium;
         }
@@ -34,10 +34,20 @@ class ArticleController extends Controller
         $articles = $premium ? Article::orderBy('created_at', 'desc')->get() : Article::orderBy('created_at', 'desc')->where('premium', 0 )->get();
 
         if ($cat_id > 0) {
+            foreach ($articles as $article) {
+                if (isset($article->categories)) {
+                    echo $article->name . "<br><br>";
+                }
+            }           
+        }
+
+            /*
+        if ($cat_id > 0) {
             $articles = Article::orderBy('created_at', 'desc')->whereHas('categories', function($query) use($cat_id) {
                 $query->where('categories.id', $cat_id);
             })->get();
         }
+            */
 
         $categories = Category::orderBy('id', 'asc')->get();
 
