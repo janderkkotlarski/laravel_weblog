@@ -18,6 +18,7 @@
 			<textarea id="entry" name="entry" required></textarea>
 			<br><br>
 
+			<!-- TODO: kies duidelijke naamgeving, bijv. category_ids -->
 			<select id="id" name="id[]" multiple>
 				@foreach($categories as $category)
 					<option value="{{ $category->id }}">{{ $category->name }}</option>
