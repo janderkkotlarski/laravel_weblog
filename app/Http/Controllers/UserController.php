@@ -13,6 +13,8 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    // TODO: overweeg een aparte AutheticationController voor authenticatie / registratie / login / logout acties, en een UserController
+    // voor user management
     public function login() {        
         return view('user.login');
     }
@@ -53,6 +55,7 @@ class UserController extends Controller
         }
 
         $articles = Article::orderBy('created_at', 'desc')->get();
+        // TODO: het is onlogisch om articles via een UserController te serveren
 
         return view('articles.overview', compact('articles'));        
     }
@@ -95,6 +98,7 @@ class UserController extends Controller
      */
     public function edit(Request $request)
     {
+        // TODO: edit method is in de regel een GET request waarbij niets gewijzigd / gestored wordt, dit is voor de UPDATE method.
         if (Auth::guest()) {
             return redirect('/user/login');
         }

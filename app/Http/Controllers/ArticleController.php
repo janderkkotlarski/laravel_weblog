@@ -19,6 +19,7 @@ class ArticleController extends Controller
     public function index() {
         $cat_id = 0;
         
+        // TODO: gebruik GET request voor index method (conventie)
         if(isset($_POST["id"])) {
             $cat_id = htmlspecialchars($_POST["id"]);
         }
@@ -28,12 +29,17 @@ class ArticleController extends Controller
         if (null !== Auth::id()) {
             $user = Auth::user();
 
+            // TODO: je kunt hier auth::user() gebruiken
+            $user = User::where('id', Auth::id())->first();
+
+
             $premium = $user->premium;
         }
 
         $articles = $premium ? Article::orderBy('created_at', 'desc')->get() : Article::orderBy('created_at', 'desc')->where('premium', 0 )->get();
 
         if ($cat_id > 0) {
+
             foreach ($articles as $article) {
                 if (isset($article->categories)) {
                     echo $article->name . "<br><br>";
@@ -43,6 +49,9 @@ class ArticleController extends Controller
 
             /*
         if ($cat_id > 0) {
+
+            // TODO: overschrijt vorige query?
+
             $articles = Article::orderBy('created_at', 'desc')->whereHas('categories', function($query) use($cat_id) {
                 $query->where('categories.id', $cat_id);
             })->get();
@@ -58,6 +67,7 @@ class ArticleController extends Controller
      * Show the form for creating a new resource.
      */
     public function create() {
+        // TODO: kan via middelware op route
         if (Auth::guest()) {
             return redirect('/user/login');
         }
@@ -74,6 +84,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {  
+        // TODO: voeg form request validation class toe (zie laravel documentatie)
         if (Auth::guest()) {
             return redirect('/user/login');
         }        
@@ -85,6 +96,7 @@ class ArticleController extends Controller
         $article->premium = $request->input('premium');
         $article->save();
 
+        // TODO: kies duidelijke naamgeving voor category ids, bijv.: categorie_ids
         $categories = $request->id;
 
         $article->categories()->attach($categories);
@@ -126,6 +138,7 @@ class ArticleController extends Controller
 
         $categories = Category::orderBy('created_at', 'desc')->get();
 
+        // TODO: kan ook met 1 with en komma gescheiden data
         return view('articles.edit')->with(compact('article'))->with(compact('user'))->with(compact('categories'));
     }
 
