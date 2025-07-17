@@ -6,7 +6,7 @@
 
 @section('content')
 	<x-middle_row>
-		<form action="{{ route('articles.filter') }}" method="POST">
+		<form action="{{ route('articles.overview') }}" method="GET">
 				@csrf
 				<label for="entry">Categoriefilter</label>
 				<br>

@@ -18,10 +18,12 @@ class ArticleController extends Controller
      */
     public function index() {
         $cat_id = 0;
+
+        $articles = Article::query();
         
         // TODO: gebruik GET request voor index method (conventie)
-        if(isset($_POST["id"])) {
-            $cat_id = htmlspecialchars($_POST["id"]);
+        if(isset($_GET["id"])) {
+            $cat_id = htmlspecialchars($_GET["id"]);
         }
 
         $premium = 0;
@@ -30,35 +32,49 @@ class ArticleController extends Controller
             $user = Auth::user();
 
             // TODO: je kunt hier auth::user() gebruiken
-            $user = User::where('id', Auth::id())->first();
+            // $user = User::where('id', Auth::id())->first();
 
 
             $premium = $user->premium;
         }
 
-        $articles = $premium ? Article::orderBy('created_at', 'desc')->get() : Article::orderBy('created_at', 'desc')->where('premium', 0 )->get();
+        $premium ? $articles->orderBy('created_at', 'desc') : $articles->orderBy('created_at', 'desc')->where('premium', 0 );
 
+        $categories = Category::orderBy('id', 'asc')->get();
+
+        // $articats = Article_category::orderBy('created_at', 'desc')->get();
+
+        // dd($categories);
+
+        /*
         if ($cat_id > 0) {
 
             foreach ($articles as $article) {
-                if (isset($article->categories)) {
-                    echo $article->name . "<br><br>";
+                // $cats = $article->categories;
+
+                dd($article);
+
+                if ($article->id === 1) {
+                    
                 }
             }           
         }
-
-            /*
+        */
+            
         if ($cat_id > 0) {
 
             // TODO: overschrijt vorige query?
 
-            $articles = Article::orderBy('created_at', 'desc')->whereHas('categories', function($query) use($cat_id) {
+            $articles->orderBy('created_at', 'desc')->whereHas('categories', function($query) use($cat_id) {
                 $query->where('categories.id', $cat_id);
-            })->get();
+            });
         }
-            */
 
-        $categories = Category::orderBy('id', 'asc')->get();
+
+        $articles = $articles->get();
+            
+
+        
 
         return view('articles.overview')->with(compact('articles'))->with(compact('categories'));
     }

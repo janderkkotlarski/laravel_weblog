@@ -35,7 +35,6 @@ Route::patch('/articles/{article}', [ArticleController::class, 'update'])->name(
 
 Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/login', [UserController::class, 'authenticate'])->name('authenticate');
-Route::post('/articles', [ArticleController::class, 'index'])->name('articles.filter');
 Route::post('/articles/create', [ArticleController::class, 'store'])->name('articles.store');
 Route::post('/comments/create', [CommentController::class, 'store'])->name('comments.store');
 Route::post('/categories/create', [CategoryController::class, 'store'])->name('categories.store');
