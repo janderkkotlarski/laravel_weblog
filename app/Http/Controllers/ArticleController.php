@@ -42,24 +42,6 @@ class ArticleController extends Controller
 
         $categories = Category::orderBy('id', 'asc')->get();
 
-        // $articats = Article_category::orderBy('created_at', 'desc')->get();
-
-        // dd($categories);
-
-        /*
-        if ($cat_id > 0) {
-
-            foreach ($articles as $article) {
-                // $cats = $article->categories;
-
-                dd($article);
-
-                if ($article->id === 1) {
-                    
-                }
-            }           
-        }
-        */
             
         if ($cat_id > 0) {
 
@@ -111,9 +93,8 @@ class ArticleController extends Controller
         $article->entry = $request->input('entry');
         $article->premium = $request->input('premium');
         $article->save();
-
-        // TODO: kies duidelijke naamgeving voor category ids, bijv.: categorie_ids
-        $categories = $request->id;
+        
+        $categories = $request->category_id;
 
         $article->categories()->attach($categories);
 
@@ -148,14 +129,10 @@ class ArticleController extends Controller
         if (Auth::guest()) {
             return redirect('/user/login');
         }
-
  
         $user = User::where('id', Auth::id())->first();
 
-        $categories = Category::orderBy('created_at', 'desc')->get();
-
-        // TODO: kan ook met 1 with en komma gescheiden data
-        return view('articles.edit')->with(compact('article'))->with(compact('user'))->with(compact('categories'));
+        return view('articles.edit', compact('article', 'user', 'categories'));
     }
 
     /**

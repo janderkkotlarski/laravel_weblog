@@ -38,6 +38,6 @@ Route::post('/login', [UserController::class, 'authenticate'])->name('authentica
 Route::post('/articles/create', [ArticleController::class, 'store'])->name('articles.store');
 Route::post('/comments/create', [CommentController::class, 'store'])->name('comments.store');
 Route::post('/categories/create', [CategoryController::class, 'store'])->name('categories.store');
-Route::post('/user/edit', [UserController::class, 'edit'])->name('user.edit');
+Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
 
 Route::redirect('/', '/articles');

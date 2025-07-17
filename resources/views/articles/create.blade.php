@@ -19,7 +19,7 @@
 			<br><br>
 
 			<!-- TODO: kies duidelijke naamgeving, bijv. category_ids -->
-			<select id="id" name="id[]" multiple>
+			<select id="category_id" name="category_id[]" multiple>
 				@foreach($categories as $category)
 					<option value="{{ $category->id }}">{{ $category->name }}</option>
 				@endforeach

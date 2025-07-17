@@ -31,7 +31,7 @@
 		
 		<td></td><td>
 			<br>
-			<form action="{{ route('user.edit') }}" method="POST">
+			<form action="{{ route('user.update') }}" method="POST">
 					@csrf
 					<select id="payment" name="payment" multiple required>				
 						<option value="1">Doekoes</option>

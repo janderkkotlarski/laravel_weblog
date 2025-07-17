@@ -54,10 +54,7 @@ class UserController extends Controller
             return view('user.overview', compact('articles'));
         }
 
-        $articles = Article::orderBy('created_at', 'desc')->get();
-        // TODO: het is onlogisch om articles via een UserController te serveren
-
-        return view('articles.overview', compact('articles'));        
+       return redirect()->route('articles.overview');  
     }
 
     /**
@@ -98,8 +95,14 @@ class UserController extends Controller
      */
     public function edit(Request $request)
     {
-        // TODO: edit method is in de regel een GET request waarbij niets gewijzigd / gestored wordt, dit is voor de UPDATE method.
-        if (Auth::guest()) {
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request)
+    {
+         if (Auth::guest()) {
             return redirect('/user/login');
         }
 
@@ -112,14 +115,6 @@ class UserController extends Controller
         $articles = $user->premium ? Article::orderBy('created_at', 'desc')->where('premium', 1 )->get() : [];
 
         return view('user.premium')->with(compact('articles'))->with(compact('user'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
     }
 
     /**
