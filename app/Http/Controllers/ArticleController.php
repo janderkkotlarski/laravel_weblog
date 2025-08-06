@@ -74,7 +74,7 @@ class ArticleController extends Controller
 
         $categories = Category::orderBy('created_at', 'desc')->get();
 
-        return view('articles.create')->with(compact('user'))->with(compact('categories'));;
+        return view('articles.create')->with(compact('user'))->with(compact('categories'));
     }
 
     /**s
@@ -131,6 +131,8 @@ class ArticleController extends Controller
         }
  
         $user = User::where('id', Auth::id())->first();
+
+        $categories = Category::orderBy('created_at', 'desc')->get();
 
         return view('articles.edit', compact('article', 'user', 'categories'));
     }

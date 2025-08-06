@@ -23,12 +23,27 @@ Route::get('/categories/create', [CategoryController::class, 'create'])->name('c
 Route::get('/user/login', [UserController::class, 'login'])->name('user.login');
 Route::get('/user/premium', [UserController::class, 'show'])->name('user.premium');
 
+/*
 Route::group(['middleware' => ['auth']], function () {
+	
 	Route::get('/user/overview', [UserController::class, 'index'])->name('user.overview');	
 
 	Route::get('auth/user', function() {
 		$user = Auth::user();
 	});
+});
+*/
+
+Route::middleware(['auth'])->group(function () {	
+	Route::get('/user/overview', [UserController::class, 'index'])->name('user.overview');	
+
+	/*
+	Route::get('auth/user', function() {
+		$user = Auth::user();
+
+		echo $user->name . '<br>';
+	});
+	*/
 });
 
 Route::patch('/articles/{article}', [ArticleController::class, 'update'])->name('articles.update');

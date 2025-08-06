@@ -33,6 +33,7 @@
 			<br>
 			<form action="{{ route('user.update') }}" method="POST">
 					@csrf
+
 					<select id="payment" name="payment" multiple required>				
 						<option value="1">Doekoes</option>
 						<option value="0">Skeer</option>
