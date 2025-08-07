@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 use App\Models\Category;
 
@@ -23,10 +22,6 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        if (Auth::guest()) {
-            return redirect('/user/login');
-        }
-
         return view('categories.create');
     }
 
@@ -35,10 +30,6 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {  
-        if (Auth::guest()) {
-            return redirect('/user/login');
-        }
-
         $category = new Category();
         $category->name = $request->input('name');
         $category->save();

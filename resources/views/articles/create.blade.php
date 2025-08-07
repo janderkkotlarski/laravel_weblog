@@ -38,6 +38,8 @@
 
 			<label for="file">Plaatje</label>
 			<input type="file" name="fileToUpload" id="fileToUpload">
+
+			<input type="hidden" id="user_id" name="user_id" value="{{ Auth::id() }}">
 			
 			<x-button type="submit">Opslaan</x-button>
 	</form>

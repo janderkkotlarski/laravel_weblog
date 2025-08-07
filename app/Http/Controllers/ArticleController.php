@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ArticleStoreRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 use App\Models\Article;
 use App\Models\Category;
@@ -65,11 +65,6 @@ class ArticleController extends Controller
      * Show the form for creating a new resource.
      */
     public function create() {
-        // TODO: kan via middelware op route
-        if (Auth::guest()) {
-            return redirect('/user/login');
-        }
-
         $user = User::where('id', Auth::id())->first();
 
         $categories = Category::orderBy('created_at', 'desc')->get();
@@ -80,15 +75,15 @@ class ArticleController extends Controller
     /**s
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {  
-        // TODO: voeg form request validation class toe (zie laravel documentatie)
-        if (Auth::guest()) {
-            return redirect('/user/login');
-        }        
+    public function store(ArticleStoreRequest $request)
+    {        
+        $validated = $request->validated();
+
+        // dd($validated);
+        // $article = Article::create($validated);
 
         $article = new Article();
-        $article->user_id = Auth::id();
+        $article->user_id = $request->input('user_id'); // Auth::id();
         $article->name = $request->input('name');
         $article->entry = $request->input('entry');
         $article->premium = $request->input('premium');
@@ -102,7 +97,7 @@ class ArticleController extends Controller
             $path = $request->fileToUpload->store('images', 'public');
 
             $file = new File();
-            $file->user_id = Auth::id();
+            $file->user_id = $article->user_id;
             $file->article_id = $article->id;
             $file->name = $path;
             $file->file_path = 'storage\\' . $path;        
@@ -126,10 +121,6 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        if (Auth::guest()) {
-            return redirect('/user/login');
-        }
- 
         $user = User::where('id', Auth::id())->first();
 
         $categories = Category::orderBy('created_at', 'desc')->get();
@@ -141,11 +132,7 @@ class ArticleController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Article $article)
-    {
-        if (Auth::guest()) {
-            return redirect('/user/login');
-        }
-        
+    {        
         $article->name = $request->input('name');
         $article->entry = $request->input('entry');
         $article->premium = $request->input('premium');
@@ -172,10 +159,6 @@ class ArticleController extends Controller
 
     public function delete(Article $article)
     {
-        if (Auth::guest()) {
-            return redirect('/user/login');
-        }
-
         return view('articles.delete', compact('article'));
     }
 
@@ -184,10 +167,6 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        if (Auth::guest()) {
-            return redirect('/user/login');
-        }
-
         $article->delete();
 
         return redirect()->route('user.overview');

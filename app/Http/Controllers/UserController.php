@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Article;
@@ -37,6 +36,8 @@ class UserController extends Controller
             $request->session()->regenerate();
 
             return redirect()->intended(route('user.overview'));
+
+            dd($request);
         }
         
         return back()->withErrors([
@@ -78,11 +79,6 @@ class UserController extends Controller
      */
     public function show()
     {
-        if (Auth::guest()) {
-            return redirect('/user/login');
-        }
-
-        
         $user = User::where('id', Auth::id())->first();
 
         $articles = $user->premium ? Article::orderBy('created_at', 'desc')->where('premium', 1 )->get() : [];
@@ -102,10 +98,6 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-         if (Auth::guest()) {
-            return redirect('/user/login');
-        }
-
         $user = User::find(Auth::id());        
 
         $user->premium = $request->payment;

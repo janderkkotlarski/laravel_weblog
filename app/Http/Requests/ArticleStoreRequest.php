@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreArticleRequest extends FormRequest
+class ArticleStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,9 +21,18 @@ class StoreArticleRequest extends FormRequest
      */
     public function rules(): array
     {
+        // $article->user_id = Auth::id();
+        // $article->name = $request->input('name');
+        // $article->entry = $request->input('entry');
+        // $article->premium = $request->input('premium');
+        // $article->save();
+
+
         return [
-            'name' => 'required',
-            
+            'user_id' => 'required',
+            'name' => 'required|string|max:255',
+            'entry' => 'required|string',
+            'premium' => 'required|integer|min:0|max:1',           
         ];
     }
 }
