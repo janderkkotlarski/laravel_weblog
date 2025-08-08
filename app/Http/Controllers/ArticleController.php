@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ArticleStoreRequest;
+use App\Http\Requests\FileStoreRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -76,21 +77,11 @@ class ArticleController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(ArticleStoreRequest $request)
-    {        
-        $validated = $request->validated();
-
-        // dd($validated);
-        // $article = Article::create($validated);
-
-        $article = new Article();
-        $article->user_id = $request->input('user_id'); // Auth::id();
-        $article->name = $request->input('name');
-        $article->entry = $request->input('entry');
-        $article->premium = $request->input('premium');
-        $article->save();
+    {
+        $valid_article = $request->validated();
+        $article = Article::create($valid_article);
         
         $categories = $request->category_id;
-
         $article->categories()->attach($categories);
 
         if ($request->file('fileToUpload')) {
@@ -100,7 +91,7 @@ class ArticleController extends Controller
             $file->user_id = $article->user_id;
             $file->article_id = $article->id;
             $file->name = $path;
-            $file->file_path = 'storage\\' . $path;        
+            $file->file_path = 'storage\\' . $path; 
 
             $file->save();
         }

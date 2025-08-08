@@ -21,15 +21,8 @@ class ArticleStoreRequest extends FormRequest
      */
     public function rules(): array
     {
-        // $article->user_id = Auth::id();
-        // $article->name = $request->input('name');
-        // $article->entry = $request->input('entry');
-        // $article->premium = $request->input('premium');
-        // $article->save();
-
-
         return [
-            'user_id' => 'required',
+            'user_id' => 'required|min:1',
             'name' => 'required|string|max:255',
             'entry' => 'required|string',
             'premium' => 'required|integer|min:0|max:1',           
