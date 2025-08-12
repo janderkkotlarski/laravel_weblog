@@ -6,6 +6,7 @@ use App\Http\Requests\ArticleStoreRequest;
 use App\Http\Requests\FileStoreRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 use App\Models\Article;
 use App\Models\Category;
@@ -79,12 +80,23 @@ class ArticleController extends Controller
     public function store(ArticleStoreRequest $request)
     {
         $valid_article = $request->validated();
+
+
         $article = Article::create($valid_article);
         
         $categories = $request->category_id;
         $article->categories()->attach($categories);
 
         if ($request->file('fileToUpload')) {
+            $validator = Validator::make($request->all(), [
+                'fileToUpload' => 'required|file|mimetypes:image/png,image/jpg,image/jpeg',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->route('user.overview')
+                ->withErrors($validator);
+            }
+
             $path = $request->fileToUpload->store('images', 'public');
 
             $file = new File();

@@ -43,4 +43,15 @@
 			</x-button>
 		</td>
 	</tr>
+
+	@if ($errors->any())
+		<tr>
+			<td></td>
+			<td>				
+				@foreach ($errors->all() as $error)
+                	<li>{{ $error }}</li>
+            	@endforeach
+			</td>
+		</tr>
+	@endif
 @endsection
