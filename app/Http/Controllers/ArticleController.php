@@ -21,7 +21,8 @@ class ArticleController extends Controller
     public function index() {
         $cat_id = 0;
 
-        $articles = Article::query();
+        // Start query building
+        $articles = Article::query(); 
         
         // TODO: gebruik GET request voor index method (conventie)
         if(isset($_GET["id"])) {
@@ -32,33 +33,24 @@ class ArticleController extends Controller
 
         if (null !== Auth::id()) {
             $user = Auth::user();
-
-            // TODO: je kunt hier auth::user() gebruiken
-            // $user = User::where('id', Auth::id())->first();
-
-
             $premium = $user->premium;
         }
 
+        // Add a premium or not query part
         $premium ? $articles->orderBy('created_at', 'desc') : $articles->orderBy('created_at', 'desc')->where('premium', 0 );
 
         $categories = Category::orderBy('id', 'asc')->get();
-
             
         if ($cat_id > 0) {
 
-            // TODO: overschrijt vorige query?
-
+            // Add a category based query part
             $articles->orderBy('created_at', 'desc')->whereHas('categories', function($query) use($cat_id) {
                 $query->where('categories.id', $cat_id);
             });
         }
 
-
-        $articles = $articles->get();
-            
-
-        
+        // Finalize the query by getting it.
+        $articles = $articles->get();         
 
         return view('articles.overview')->with(compact('articles'))->with(compact('categories'));
     }
@@ -67,7 +59,7 @@ class ArticleController extends Controller
      * Show the form for creating a new resource.
      */
     public function create() {
-        $user = User::where('id', Auth::id())->first();
+        $user = Auth::user();
 
         $categories = Category::orderBy('created_at', 'desc')->get();
 
@@ -81,8 +73,9 @@ class ArticleController extends Controller
     {
         $valid_article = $request->validated();
 
-
         $article = Article::create($valid_article);
+
+        
         
         $categories = $request->category_id;
         $article->categories()->attach($categories);
@@ -124,7 +117,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        $user = User::where('id', Auth::id())->first();
+        $user = Auth::user();
 
         $categories = Category::orderBy('created_at', 'desc')->get();
 
