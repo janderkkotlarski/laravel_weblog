@@ -21,7 +21,7 @@ class UserController extends Controller
     public function logout() {
         Auth::logout();
 
-        return redirect('articles');
+        return redirect('/');
     }
 
     public function authenticate(Request $request): RedirectResponse {

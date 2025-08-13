@@ -22,10 +22,24 @@ class ArticleStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|max:-1',
+            'user_id' => 'required|integer|gte:1',
             'name' => 'required|string|max:255',
             'entry' => 'required|string',
             'premium' => 'required|integer|min:0|max:1',           
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'user_id.required' => 'Er is geen user_id.',
+            'user_id.integer' => 'user_id is geen geheel getal.',
+            'user_id.gte' => 'user_id moet minstens 1 zijn.',
+            'name.required' => 'Waar is de naam?',
+            'name.max' => 'Naam is langer dan 255 tekens',
+            'entry.required' => 'Waar is de tekst?',
+            'premium.required' => 'Een premium aanduiding is noodzakelijk.',
+            'premium.min' => 'Premium moet minstens 0 zijn.'
         ];
     }
 }
