@@ -22,7 +22,7 @@ class ArticleStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|min:1',
+            'user_id' => 'required|max:-1',
             'name' => 'required|string|max:255',
             'entry' => 'required|string',
             'premium' => 'required|integer|min:0|max:1',           

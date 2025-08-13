@@ -73,6 +73,8 @@ class ArticleController extends Controller
     {
         $valid_article = $request->validated();
 
+        dd($valid_article);
+
         $article = Article::create($valid_article);
 
         

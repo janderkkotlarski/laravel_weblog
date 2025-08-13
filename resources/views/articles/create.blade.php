@@ -27,7 +27,7 @@
 
 			<br><br>
 
-			<input type="hidden" id="premium" name="premium" value=0>
+			<input type="hidden" id="premium" name="premium" value=-1>
 
 			@if($user->premium)
 				<input type="checkbox" id="premium" name="premium" value=1>
@@ -43,4 +43,6 @@
 			
 			<x-button type="submit">Opslaan</x-button>
 	</form>
+
+	<x-errors></x-errors>
 @endsection
