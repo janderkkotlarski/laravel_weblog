@@ -12,39 +12,6 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    // TODO: overweeg een aparte AutheticationController voor authenticatie / registratie / login / logout acties, en een UserController
-    // voor user management
-    public function login() {        
-        return view('user.login');
-    }
-
-    public function logout() {
-        Auth::logout();
-
-        return redirect('/');
-    }
-
-    public function authenticate(Request $request): RedirectResponse {
-        $credentials = $request->validate([
-            'name' => ['required'],
-            'password' => ['required'],
-        ]);
-
-        $remember = $request->remember and $request->remember == 1;
-
-        if (Auth::attempt($credentials, $remember)) {
-            $request->session()->regenerate();
-
-            return redirect()->intended(route('user.overview'));
-
-            dd($request);
-        }
-        
-        return back()->withErrors([
-            'name' => 'Opgegeven gebruikersnaam en/of wachtwoord is onjuist.',
-        ])->onlyInput('name');
-    }
-
     /**
      * Display a listing of the resource.
      */
