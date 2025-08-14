@@ -6,6 +6,7 @@
 
 @section('content')
 	<form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
+		<!--
 			@csrf
 			<label for="name">Titel</label>
 			<br>
@@ -18,7 +19,6 @@
 			<textarea id="entry" name="entry" required></textarea>
 			<br><br>
 
-			<!-- TODO: kies duidelijke naamgeving, bijv. category_ids -->
 			<select id="category_id" name="category_id[]" multiple>
 				@foreach($categories as $category)
 					<option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -42,7 +42,16 @@
 			<input type="hidden" id="user_id" name="user_id" value="{{ Auth::id() }}">
 			
 			<x-button type="submit">Opslaan</x-button>
+-->
+
+{{ $article = new Article::class }}
+
+
+
+			<x-article_form :$categories :$user/>
 	</form>
+
+		
 
 	<x-errors></x-errors>
 @endsection

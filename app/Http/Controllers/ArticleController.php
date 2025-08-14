@@ -123,8 +123,10 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Article $article)
+    public function update(ArticleStoreRequest $request, Article $article)
     {        
+        $valid_article = $request->validated();
+
         $article->name = $request->input('name');
         $article->entry = $request->input('entry');
         $article->premium = $request->input('premium');

@@ -9,7 +9,7 @@ class Article extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','name', 'entry', 'premium'];
+    protected $fillable = ['user_id', 'name', 'entry', 'premium'];
 
     protected $with = ['user'];
 

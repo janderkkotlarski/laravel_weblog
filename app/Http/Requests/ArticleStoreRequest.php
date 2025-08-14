@@ -39,7 +39,8 @@ class ArticleStoreRequest extends FormRequest
             'name.max' => 'Naam is langer dan 255 tekens',
             'entry.required' => 'Waar is de tekst?',
             'premium.required' => 'Een premium aanduiding is noodzakelijk.',
-            'premium.min' => 'Premium moet minstens 0 zijn.'
+            'premium.min' => 'Premium mag minimaal 0 zijn.',
+            'premium.max' => 'Premium mag maximaal 1 zijn.'
         ];
     }
 }
