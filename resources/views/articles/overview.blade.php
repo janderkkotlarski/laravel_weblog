@@ -10,7 +10,7 @@
 				@csrf
 				<label for="entry">Categoriefilter</label>
 				<br>
-				<select id="id" name="id">
+				<select id="category_id" name="category_id">
 					<option value="0"></option>
 					@foreach($categories as $category)
 						<option value="{{ $category->id }}">{{ $category->name }}</option>

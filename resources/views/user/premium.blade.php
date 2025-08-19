@@ -25,10 +25,7 @@
 		@endforeach
 	@endif
 
-	
-
-	<tr>
-		
+	<tr>		
 		<td></td><td>
 			<br>
 			<form action="{{ route('user.update') }}" method="POST">

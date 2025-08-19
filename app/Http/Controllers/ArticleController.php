@@ -22,9 +22,9 @@ class ArticleController extends Controller
         // Start query building
         $articles = Article::query(); 
         
-        // TODO: gebruik GET request voor index method (conventie)
-        if(isset($_GET["id"])) {
-            $cat_id = htmlspecialchars($_GET["id"]);
+        // Using GET request to get the category_id
+        if(isset($_GET["category_id"])) {
+            $cat_id = htmlspecialchars($_GET["category_id"]);
         }
 
         $premium = 0;
@@ -40,7 +40,6 @@ class ArticleController extends Controller
         $categories = Category::orderBy('id', 'asc')->get();
             
         if ($cat_id > 0) {
-
             // Add a category based query part
             $articles->orderBy('created_at', 'desc')->whereHas('categories', function($query) use($cat_id) {
                 $query->where('categories.id', $cat_id);
@@ -64,31 +63,30 @@ class ArticleController extends Controller
         return view('articles.create')->with(compact('user'))->with(compact('categories'));
     }
 
+    public function validation(ArticleStoreRequest $request) {
+        $validator = Validator::make($request->all(), [
+            'fileToUpload' => 'required|file|mimetypes:image/png,image/jpg,image/jpeg',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('user.overview')
+            ->withErrors($validator);
+        }
+    }
+
     /**s
      * Store a newly created resource in storage.
      */
     public function store(ArticleStoreRequest $request)
     {
-        $valid_article = $request->validated();
-
-        
-
-        $article = Article::create($valid_article);
-       
+        $valid_article = $request->validated();  
+        $article = Article::create($valid_article);       
         
         $categories = $request->category_id;
-
         $article->categories()->attach($categories);
 
         if ($request->file('fileToUpload')) {
-            $validator = Validator::make($request->all(), [
-                'fileToUpload' => 'required|file|mimetypes:image/png,image/jpg,image/jpeg',
-            ]);
-
-            if ($validator->fails()) {
-                return redirect()->route('user.overview')
-                ->withErrors($validator);
-            }
+            ArticleController::validation($request);
 
             $path = $request->fileToUpload->store('images', 'public');
 
@@ -118,7 +116,6 @@ class ArticleController extends Controller
     public function edit(Article $article)
     {
         $user = Auth::user();
-
         $categories = Category::orderBy('created_at', 'desc')->get();
 
         return view('articles.edit', compact('article', 'user', 'categories'));
@@ -138,20 +135,12 @@ class ArticleController extends Controller
         $article->save();
         
         $categories = $request->category_id;
-
         $article->categories()->detach();
         // If one wants to change the categories, detachment is necessary
         $article->categories()->attach($categories);
 
         if ($request->file('fileToUpload')) {
-            $validator = Validator::make($request->all(), [
-                'fileToUpload' => 'required|file|mimetypes:image/png,image/jpg,image/jpeg',
-            ]);
-
-            if ($validator->fails()) {
-                return redirect()->route('user.overview')
-                ->withErrors($validator);
-            }
+            ArticleController::validation($request);
 
             $path = $request->fileToUpload->store('images', 'public');
 

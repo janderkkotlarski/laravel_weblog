@@ -33,11 +33,3 @@ Route::post('/categories/create', [CategoryController::class, 'store'])->name('c
 Route::post('/user/update', [UserController::class, 'update'])->name('user.update')->middleware('auth');
 
 Route::redirect('/', '/articles');
-
-/*
- <!--
-    @foreach($categories as $category)
-        <option value="{{ $category->id }}">{{ $category->name }}</option>
-    @endforeach
--->
-*/
