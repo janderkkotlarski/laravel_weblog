@@ -71,9 +71,13 @@ class ArticleController extends Controller
     {
         $valid_article = $request->validated();
 
+        
+
         $article = Article::create($valid_article);
        
+        
         $categories = $request->category_id;
+
         $article->categories()->attach($categories);
 
         if ($request->file('fileToUpload')) {
@@ -130,13 +134,25 @@ class ArticleController extends Controller
         $article->name = $request->input('name');
         $article->entry = $request->input('entry');
         $article->premium = $request->input('premium');
+        
         $article->save();
+        
+        $categories = $request->category_id;
 
-        $categories = $request->id;
-
+        $article->categories()->detach();
+        // If one wants to change the categories, detachment is necessary
         $article->categories()->attach($categories);
 
         if ($request->file('fileToUpload')) {
+            $validator = Validator::make($request->all(), [
+                'fileToUpload' => 'required|file|mimetypes:image/png,image/jpg,image/jpeg',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->route('user.overview')
+                ->withErrors($validator);
+            }
+
             $path = $request->fileToUpload->store('images', 'public');
 
             $file = new File();

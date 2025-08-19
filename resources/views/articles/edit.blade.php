@@ -8,8 +8,8 @@
 	<form action="{{ route('articles.update', $article) }}" method="POST" enctype="multipart/form-data">
 		@method('PATCH')
 
-		{{ $particle = $article }}
-
-		<x-article_form  :$categories :$user an_article="{{ $particle }}"/>			
+		<x-article_form  :$categories :$user :$article/>			
 	</form>
+
+	<x-errors />
 @endsection
