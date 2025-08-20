@@ -38,6 +38,7 @@ class ArticleController extends Controller
 
         $categories = Category::orderBy('id', 'asc')->get();
             
+        // TODO: $cat_id kan weg; controleer op $request->has("category_id")
         if ($cat_id > 0) {
             // Add a category based query part
             $articles->orderBy('created_at', 'desc')->whereHas('categories', function($query) use($cat_id) {
@@ -63,6 +64,7 @@ class ArticleController extends Controller
     }
 
     public function validation(ArticleStoreRequest $request) {
+        // TODO: validatie voor file aan ArticleStoreRequest toevoegen
         $validator = Validator::make($request->all(), [
             'fileToUpload' => 'required|file|mimetypes:image/png,image/jpg,image/jpeg',
         ]);
@@ -140,6 +142,7 @@ class ArticleController extends Controller
         
         $categories = $request->category_id;
         // If one wants to change the categories, detachment is necessary
+        // TODO: overweeg sync method, dat spaart je 1 detach actie uit
         $article->categories()->detach();
         $article->categories()->attach($categories);
 
