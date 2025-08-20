@@ -14,4 +14,6 @@
 			<br><br>			
 			<x-button type="submit">Opslaan</x-button>
 	</form>
+
+	<x-errors />
 @endsection

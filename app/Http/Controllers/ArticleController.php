@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ArticleStoreRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -74,17 +73,7 @@ class ArticleController extends Controller
         }
     }
 
-    /**s
-     * Store a newly created resource in storage.
-     */
-    public function store(ArticleStoreRequest $request)
-    {
-        $valid_article = $request->validated();  
-        $article = Article::create($valid_article);       
-        
-        $categories = $request->category_id;
-        $article->categories()->attach($categories);
-
+    public function file_uploading(ArticleStoreRequest $request, Article $article) {
         if ($request->file('fileToUpload')) {
             ArticleController::validation($request);
 
@@ -98,6 +87,20 @@ class ArticleController extends Controller
 
             $file->save();
         }
+    }
+
+    /**s
+     * Store a newly created resource in storage.
+     */
+    public function store(ArticleStoreRequest $request)
+    {
+        // Just directly create a new article from the validated request, ezpz
+        $article = Article::create($request->validated());       
+        
+        $categories = $request->category_id;
+        $article->categories()->attach($categories);
+
+        ArticleController::file_uploading($request, $article);
 
         return redirect()->route('user.overview');
     }
@@ -125,12 +128,18 @@ class ArticleController extends Controller
      * Update the specified resource in storage.
      */
     public function update(ArticleStoreRequest $request, Article $article)
-    {        
-        $valid_article = $request->validated();
+    {   
+        // Best to turn the validated values into an updated article.
+        $updated = new Article($request->validated());
 
-        $article->name = $request->input('name');
-        $article->entry = $request->input('entry');
-        $article->premium = $request->input('premium');
+        $article->name = $updated->name;
+        $article->entry = $updated->entry;
+        $article->premium = $updated->premium;
+
+
+        // $article->name = $request->input('name');
+        // $article->entry = $request->input('entry');
+        // $article->premium = $request->input('premium');
         
         $article->save();
         
@@ -139,19 +148,7 @@ class ArticleController extends Controller
         // If one wants to change the categories, detachment is necessary
         $article->categories()->attach($categories);
 
-        if ($request->file('fileToUpload')) {
-            ArticleController::validation($request);
-
-            $path = $request->fileToUpload->store('images', 'public');
-
-            $file = new File();
-            $file->user_id = Auth::id();
-            $file->article_id = $article->id;
-            $file->name = $path;
-            $file->file_path = 'storage\\' . $path;        
-
-            $file->save();
-        }
+        ArticleController::file_uploading($request, $article);
 
         return redirect()->route('user.overview');
     }

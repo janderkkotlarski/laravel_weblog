@@ -65,10 +65,8 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $user = User::find(Auth::id());        
-
+        $user = User::find(Auth::id());
         $user->premium = $request->payment;
-
         $user->save();
 
         $articles = $user->premium ? Article::orderBy('created_at', 'desc')->where('premium', 1 )->get() : [];
