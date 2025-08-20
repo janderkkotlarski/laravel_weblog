@@ -135,17 +135,12 @@ class ArticleController extends Controller
         $article->name = $updated->name;
         $article->entry = $updated->entry;
         $article->premium = $updated->premium;
-
-
-        // $article->name = $request->input('name');
-        // $article->entry = $request->input('entry');
-        // $article->premium = $request->input('premium');
         
         $article->save();
         
         $categories = $request->category_id;
-        $article->categories()->detach();
         // If one wants to change the categories, detachment is necessary
+        $article->categories()->detach();
         $article->categories()->attach($categories);
 
         ArticleController::file_uploading($request, $article);

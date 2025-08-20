@@ -34,8 +34,8 @@
 			@csrf
 			<label for="entry">Commentaar</label>
 
-			<input type="hidden" name="user_id" value="{{ Auth::id() }}">
-			<input type="hidden" name="article_id" value="{{ $article->id }}">
+			<input type="hidden" id="user_id" name="user_id" value="{{ Auth::id() }}">
+			<input type="hidden" id="article_id" name="article_id" value="{{ $article->id }}">
 
 			<br>
 			
@@ -44,6 +44,8 @@
 			
 			<x-button type="submit">Opslaan</x-button>
 		</form>
+
+		<x-errors />
 	@endauth
 @endsection
 

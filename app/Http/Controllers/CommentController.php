@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CommentStoreRequest;
 
 use App\Models\Comment;
 use App\Models\Article;
@@ -28,14 +29,11 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CommentStoreRequest $request)
     {
-        $comment = new Comment();
-        $comment->user_id = $request->input('user_id');
-        $comment->article_id = $request->input('article_id');
-        $comment->entry = $request->input('entry');
-        $comment->save();
-
+        // Turn authorize to true in order to prevent 403 errors
+        $comment = Comment::create($request->validated());
+        
         $article = Article::find($comment->article_id);
 
         return view('articles.show', compact('article'));
@@ -59,7 +57,7 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(string $id)
     {
         //
     }

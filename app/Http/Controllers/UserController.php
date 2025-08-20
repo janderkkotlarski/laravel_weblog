@@ -65,8 +65,11 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $user = User::find(Auth::id());
+        $user = Auth::user();
+
         $user->premium = $request->payment;
+        // Saving works when pressing the button, but the ide warns about a not supported saving method
+        // [Auth::user() === User::find(Auth::id())] according to var_dump output
         $user->save();
 
         $articles = $user->premium ? Article::orderBy('created_at', 'desc')->where('premium', 1 )->get() : [];
