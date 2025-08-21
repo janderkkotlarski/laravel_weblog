@@ -63,22 +63,9 @@ class ArticleController extends Controller
         return view('articles.create')->with(compact('user'))->with(compact('categories'));
     }
 
-    public function validation(ArticleStoreRequest $request) {
-        // TODO: validatie voor file aan ArticleStoreRequest toevoegen
-        $validator = Validator::make($request->all(), [
-            'fileToUpload' => 'required|file|mimetypes:image/png,image/jpg,image/jpeg',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->route('user.overview')
-            ->withErrors($validator);
-        }
-    }
 
     public function file_uploading(ArticleStoreRequest $request, Article $article) {
         if ($request->file('fileToUpload')) {
-            ArticleController::validation($request);
-
             $path = $request->fileToUpload->store('images', 'public');
 
             $file = new File();
@@ -143,8 +130,10 @@ class ArticleController extends Controller
         $categories = $request->category_id;
         // If one wants to change the categories, detachment is necessary
         // TODO: overweeg sync method, dat spaart je 1 detach actie uit
-        $article->categories()->detach();
-        $article->categories()->attach($categories);
+
+        $article->categories()->sync($categories);
+        // $article->categories()->detach();
+        // $article->categories()->attach($categories);
 
         ArticleController::file_uploading($request, $article);
 

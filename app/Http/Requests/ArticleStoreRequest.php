@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Termwind\Components\Dd;
 
 class ArticleStoreRequest extends FormRequest
 {
@@ -25,7 +26,8 @@ class ArticleStoreRequest extends FormRequest
             'user_id' => 'required|integer|gte:1',
             'name' => 'required|string|max:255',
             'entry' => 'required|string',
-            'premium' => 'required|integer|min:0|max:1',           
+            'premium' => 'required|integer|min:0|max:1',
+            'fileToUpload' => 'file|mimetypes:image/png,image/jpg,image/jpeg|max:1024',      
         ];
     }
 
@@ -40,7 +42,9 @@ class ArticleStoreRequest extends FormRequest
             'entry.required' => 'Waar is de tekst?',
             'premium.required' => 'Een premium aanduiding is noodzakelijk.',
             'premium.min' => 'Premium mag minimaal 0 zijn.',
-            'premium.max' => 'Premium mag maximaal 1 zijn.'
+            'premium.max' => 'Premium mag maximaal 1 zijn.',
+            'fileToUpload.mimetypes' => 'Bestand mag alleen jpg/jpeg of png zijn.',
+            'fileToUpload.max' => 'Bestand is groter dan 1 Megabyte.',
         ];
     }
 }
