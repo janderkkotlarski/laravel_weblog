@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\ArticleStoreRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -15,17 +16,10 @@ class ArticleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() {
-        $cat_id = 0;
-
+    public function index(Request $request) {
         // Start query building
         $articles = Article::query(); 
         
-        // Using GET request to get the category_id
-        if(isset($_GET["category_id"])) {
-            $cat_id = htmlspecialchars($_GET["category_id"]);
-        }
-
         $premium = 0;
 
         if (null !== Auth::id()) {
@@ -39,17 +33,18 @@ class ArticleController extends Controller
         $categories = Category::orderBy('id', 'asc')->get();
             
         // TODO: $cat_id kan weg; controleer op $request->has("category_id")
-        if ($cat_id > 0) {
+        if ($request->category_id != 0) {
             // Add a category based query part
-            $articles->orderBy('created_at', 'desc')->whereHas('categories', function($query) use($cat_id) {
-                $query->where('categories.id', $cat_id);
+ 
+            $articles->orderBy('created_at', 'desc')->whereHas('categories', function($query) use($request) {
+                $query->where('categories.id', $request->category_id);
             });
         }
 
         // Finalize the query by getting it.
-        $articles = $articles->get();         
+        $articles = $articles->get();     
 
-        return view('articles.overview')->with(compact('articles'))->with(compact('categories'));
+        return view('articles.overview')->with(compact('articles'))->with(compact('categories'))->with(compact('request'));
     }
 
     /**
@@ -86,8 +81,9 @@ class ArticleController extends Controller
         // Just directly create a new article from the validated request, ezpz
         $article = Article::create($request->validated());       
         
-        $categories = $request->category_id;
-        $article->categories()->attach($categories);
+         // Sync seems at least as good as attach...
+        // And direct $request->category_id array infusion works
+        $article->categories()->sync($request->category_id);
 
         ArticleController::file_uploading($request, $article);
 
@@ -127,13 +123,8 @@ class ArticleController extends Controller
         
         $article->save();
         
-        $categories = $request->category_id;
-        // If one wants to change the categories, detachment is necessary
-        // TODO: overweeg sync method, dat spaart je 1 detach actie uit
-
-        $article->categories()->sync($categories);
-        // $article->categories()->detach();
-        // $article->categories()->attach($categories);
+        // Sync does auto detach and attach
+        $article->categories()->sync($request->category_id);
 
         ArticleController::file_uploading($request, $article);
 

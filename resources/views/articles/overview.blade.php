@@ -18,6 +18,15 @@
 				</select>
 				<br>
 				<x-button type="submit">Opslaan</x-button>
+
+				@if($request->category_id != 0)
+					<br><br>
+					@foreach($categories as $category)
+						@if($category->id == $request->category_id)
+							<b>Categorie: {{ $category->name }}</b>
+						@endif
+					@endforeach
+				@endif				
 		</form>
 		<br>
 	</x-middle_row>
