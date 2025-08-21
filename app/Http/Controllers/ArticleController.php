@@ -32,10 +32,8 @@ class ArticleController extends Controller
 
         $categories = Category::orderBy('id', 'asc')->get();
             
-        // TODO: $cat_id kan weg; controleer op $request->has("category_id")
         if ($request->category_id != 0) {
-            // Add a category based query part
- 
+            // Add a category based query part 
             $articles->orderBy('created_at', 'desc')->whereHas('categories', function($query) use($request) {
                 $query->where('categories.id', $request->category_id);
             });
@@ -44,6 +42,7 @@ class ArticleController extends Controller
         // Finalize the query by getting it.
         $articles = $articles->get();     
 
+        // The $request object still has the chose category_id part, which is handy
         return view('articles.overview')->with(compact('articles'))->with(compact('categories'))->with(compact('request'));
     }
 
@@ -81,7 +80,7 @@ class ArticleController extends Controller
         // Just directly create a new article from the validated request, ezpz
         $article = Article::create($request->validated());       
         
-         // Sync seems at least as good as attach...
+        // Sync seems at least as good as attach...
         // And direct $request->category_id array infusion works
         $article->categories()->sync($request->category_id);
 
